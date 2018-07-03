@@ -2,8 +2,26 @@
 
 {% block title %}  Libros {% endblock %}
 
+<!--  items de navbar de administrador  -->
+
+{% block navbar_items %}
+
+    <li class="nav-item active">
+        <a class="nav-link" href="#"> Libros <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#"> Autor </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#"> Tema </a>
+    </li>
+
+{% endblock navbar_items %}
+
+
 {% block content %}
 
     <h1> Administrador </h1>
-    <h1>Welcome admin {{user.first_name}} </h1>
+    <h1>Welcome {{user.first_name}} </h1>
+
 {% endblock %}
