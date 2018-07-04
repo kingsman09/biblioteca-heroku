@@ -15,8 +15,8 @@ class IndexView(LoginRequiredMixin, View):
     def get(request):
         user = request.user
 
-        # if user.is_superuser:
-        #     return redirect('/admin/')
+        if user.is_superuser:
+            return redirect('/admin/')
 
         admin_user = Group.objects.get(name='admin')
         if admin_user in user.groups.all():

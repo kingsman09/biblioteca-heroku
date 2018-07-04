@@ -1,6 +1,4 @@
 
-
-
 function ValidarLetra(evt, tipo) {
     var tecla = evt.keyCode;
 
