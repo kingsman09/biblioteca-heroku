@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'usuarios',
     'models.paises',
     'apps.libros',
+    'apps.temas',
+    'apps.autores',
+    'apps.prestamos',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} Temas {% endblock %}
+
+{% block content %}
+
+
+    <div class="container mt-4" align='center'>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Save!</button>
+        </form>
+    </div>
+
+    <script>
+        const temaInput = document.getElementById('id_tema')
+        temaInput.setAttribute('onkeypress', 'return ValidarLetra(event, 1);')
+    </script>
+{% endblock %}
