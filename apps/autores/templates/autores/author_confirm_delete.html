@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block title %}Admin Site {% endblock %}
+{% block title %}Eliminar Autor{% endblock %}
 
 
 <!--  items de navbar de administrador  -->
@@ -11,10 +11,10 @@
     <li class="nav-item ">
         <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item active">
         <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
     </li>
 
@@ -25,10 +25,10 @@
     <main class="container">
         <form method="post">
             {% csrf_token %}
-            <p class="align-center"> ¿Está seguro que quiere eliminar el tema "{{ object }}"?</p>
+            <p class="align-center"> ¿Está seguro que quiere eliminar el autor "{{ object }}"?</p>
             <div class="button-group align-center">
                 <button type="submit" class="btn btn-danger">Delete</button>
-                <a href="{% url 'temas:temas-admin' %}" class="btn btn-warning">Cancel</a>
+                <a href="{% url 'autor:autores-admin' %}" class="btn btn-warning">Cancel</a>
             </div>
         </form>
     </main>

@@ -1,27 +1,29 @@
 {% extends "base.html" %}
 
-{% block title %}  Libros {% endblock %}
-
-<!--  items de navbar de administrador  -->
+{% block title %} Crear Autor {% endblock %}
 
 {% block navbar_items %}
 
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item active">
         <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
     </li>
 
-{% endblock navbar_items %}
-
+{% endblock %}
 
 {% block content %}
 
-    <h1> Administrador </h1>
-    <h1>Welcome {{user.first_name}} </h1>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
 
+            <button type="submit" class="btn btn-success"><i class="fas fa-upload"></i> Hecho </button>
+        </form>
+    </div>
 {% endblock %}

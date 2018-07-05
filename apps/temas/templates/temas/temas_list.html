@@ -8,13 +8,13 @@
 {% block navbar_items %}
 
     <li class="nav-item">
-        <a class="nav-link" href="#"> Libros <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"> Autor </a>
+        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="#"> Tema </a>
+        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
     </li>
 
 {% endblock navbar_items %}
@@ -40,7 +40,7 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <th> {{ tema.tema }}</th>
                         <th> {{ tema.fecha_ingreso }} </th>
-                        <th> <a href="{% url 'temas:editar-tema' tema.id %}" class="btn btn-warning" >Editar </a> &nbsp &nbsp <a href="{% url 'temas:eliminar-tema' tema.id %}" class="btn btn-danger"> Eliminar</a></th>
+                        <th> <a href="{% url 'temas:editar-tema' tema.id %}" class="btn btn-warning" >Editar </a> &nbsp &nbsp <a href="{% url 'temas:eliminar-tema' tema.id %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a></th>
                     </tr>
                     {% empty %}
                     <div class="container mt-2">

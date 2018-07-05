@@ -2,8 +2,21 @@
 
 {% block title %} Temas {% endblock %}
 
-{% block content %}
+{% block navbar_items %}
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
+    </li>
 
+
+{% endblock %}
+
+{% block content %}
 
     <div class="container mt-4" align='center'>
         <form method="POST">
