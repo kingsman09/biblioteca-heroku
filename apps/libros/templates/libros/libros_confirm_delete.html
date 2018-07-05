@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} Eliminar Libro {% endblock %}
+
+{% block navbar_items %}
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
+    </li>
+
+{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <form method="post">
+        {% csrf_token %}
+        <p class="align-center"> ¿Está seguro que quiere eliminar el Libro "{{ object }}"?</p>
+        <div class="button-group align-center">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'book:admin_index' %}" class="btn btn-warning">Cancel</a>
+        </div>
+    </form>
+</main>
+
+{% endblock %}

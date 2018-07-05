@@ -43,7 +43,7 @@
                         <th> {{ autor.nombre }} </th>
                         <th> {{ autor.apellido }} </th>
                         <th> {{ autor.nacionalidad }} </th>
-                        <th> {{ autor.fecha_registro }} </th>
+                        <th> {{ autor.fecha_registro|date:"l d M Y" }} </th>
                         <th> <a href="{% url 'autor:editar-autor' autor.id %}" class="btn btn-warning"> Editar </a> &nbsp; <a href="{% url 'autor:eliminar-autor' autor.id %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a></th>
                     </tr>   
                     {% empty %}

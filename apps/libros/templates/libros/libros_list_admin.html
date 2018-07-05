@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}  Libros {% endblock %}
+
+<!--  items de navbar de administrador  -->
+
+{% block navbar_items %}
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link"> Prestamos </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link"> Usuarios </a>
+    </li>
+
+{% endblock navbar_items %}
+
+
+{% block content %}
+
+    <div class="container mt-4">
+        <a href="{% url 'book:crear-libro' %}" class="btn btn-primary">Ingresar Libro </a>
+    </div>
+
+    <form method="GET">
+        <input type="text" name="paginate_by"> 
+        <button type="submit"> Hecho</button>
+    </form>
+    
+    <div class="container">
+        <table class="table table-hover mt-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col"> Titulo </th>
+                    <th scope="col"> Autor </th>
+                    <th scope="col"> Tema </th>
+                    <th scope="col"> ubicacion </th>
+                    <th scope="col"> Disp </th>
+                    <th scope="col"> Operaciones </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for libro in Libro %}
+                    <tr>
+                        <th scope="col"> {{ forloop.counter }}</th>
+                        <th> {{ libro.titulo }} </th>
+                        <th> {{ libro.autor }} </th>
+                        <th> {{ libro.tema }} </th>
+                        <th> {{ libro.ubicacion }} </th>
+                        <th> {{ libro.disponibles }} </th>
+                        <th> <a href="{% url 'book:editar-libro' libro.id %}"  class="btn btn-warning"> Editar </a> &nbsp; <a href="{% url 'book:eliminar-libro' libro.id %}" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</a></th>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+        
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+
+                        <li class="page-item"> <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span class="page-link">&laquo; </span> </li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="active page-item"><span class="page-link"> {{ i }} <span class="sr-only">current</span></span></li>
+                        {% else %}
+                            <li class="page-item"><a href="?page={{ i }}" class="page-link"> {{ i }} </a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled" class="page-item"> <span class="page-link">&raquo;</span> </li>
+                    {% endif %}
+                </ul>
+            </nav>
+       
+
+    </div>
+
+{% endblock %}
