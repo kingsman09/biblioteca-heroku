@@ -10,18 +10,18 @@ from django.urls import reverse_lazy
 class AdminBookList(AdminMixin, ListView):
     model = Libros
     context_object_name = 'Libro'
-    paginate_by = 2
+    
     template_name_suffix = '_list_admin'
     queryset = Libros.objects.all()
 
-    # def get_paginate_by(self, queryset):
-    #     try:
-    #         paginate_by = self.request.GET.get('paginate_by', 5)
-    #         paginate_by = int(paginate_by)
-    #     except ValueError:
-    #         paginate_by = 5
-    #     finally:
-    #         return paginate_by
+    def get_paginate_by(self, queryset):
+        try:
+            paginate_by = self.request.GET.get('paginate_by', 5)
+            paginate_by = int(paginate_by)
+        except ValueError:
+            paginate_by = 5
+        finally:
+            return paginate_by
 
 
 def _update_or_create(view):
