@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from .forms import UserCreationForm
-from django.views.generic import CreateView, View
+from .forms import UserCreationForm, DetailForm
+from django.views.generic import CreateView, View, ListView, DetailView
+from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
+from .mixins import AdminMixin
+from .models import User
+
 
 # Create your views here.
 class IndexView(LoginRequiredMixin, View):
@@ -36,7 +40,7 @@ def _sign_up(name):
         model = get_user_model()
         form_class = UserCreationForm
         success_url = reverse_lazy('usuarios:index')
-        template_name = 'usuarios/user_form.html'
+        template_name = 'usuarios/create_user.html'
 
         def form_valid(self, form:UserCreationForm):
             user = form.save()
@@ -56,8 +60,22 @@ SignUpAdmin = _sign_up('admin')
 SignUpUser = _sign_up('user')
         
 
-
-
-
 class SignOutView(LoginRequiredMixin, LogoutView):
     pass
+
+
+class UserListView(AdminMixin, ListView):
+    model = get_user_model() 
+    queryset = model.objects.filter(groups__name__in=['user'])   
+    context_object_name = 'Users'
+
+class UserDetailView(AdminMixin, UpdateView):
+    model = get_user_model()
+    form_class = DetailForm
+    success_url = 'usuarios:user-list'
+
+
+    
+
+
+    

@@ -1,19 +1,39 @@
 {% extends "base.html" %}
 
+{% block title %} Detalle {% endblock %}
+
+
+{% block navbar_items %}
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link"> Prestamos </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link"> Usuarios </a>
+    </li>
+
+{% endblock navbar_items %}
+
+
 {% block content %}
-  
-<div>
-    <form method="post">
+    <div>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" > Entrar</button>
-    </form>
-</div>
+    </div>
 
-<style>
-    .errorlist{
-        display: none;
-    }
-</style>
+    <script>
+        $('input').prop("disabled", true)
+        $('#id_imagen').hide()
+        $("select").prop("disabled", true)
+    </script>
 
 {% endblock %}

@@ -39,5 +39,7 @@ class DeleteBookView(DeleteView):
     success_url = reverse_lazy('book:admin_index')
 
 
-class UserBookList(UserMixin, TemplateView):
+class UserBookList(UserMixin, ListView):
+    model = Libros
+    context_object_name = 'Libro'
     template_name = 'libros/user_list.html'

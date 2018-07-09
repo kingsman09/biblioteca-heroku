@@ -20,3 +20,22 @@ class UserCreationForm(auth_forms.UserCreationForm):
             'zona',
             'imagen'
         ]
+
+
+class DetailForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = [
+                'email',
+                'username',
+                'first_name',
+                'last_name',
+                'celphone',
+                'gender',
+                'municipio',
+                'adress',
+                'birth_date',
+                'zona',
+                'imagen'
+            ]
+

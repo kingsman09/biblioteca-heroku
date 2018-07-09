@@ -1,13 +1,56 @@
 {% extends "base.html" %}
 
 
-{% block navbar %} <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li> {% endblock %}
+{% block navbar_items %} 
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'book:user_index' %}">Libros <span class="sr-only">(current)</span></a>
+    </li> 
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'autor:autores-user' %}">Autores </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Temas </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Prestamos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Perfil </a>
+    </li>
+{% endblock %}
 
 {% block title %}  Libros {% endblock %}
+
+
 {% block content %}
 
+    <div class="container mt-3">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" > #  </th>
+                    <th scope="col" > Libro </th>
+                    <th scope="col" > Autor </th>
+                    <th scope="col" > Tema </th>
+                    <th scope="col" > Ubicacion </th>
+                    <th scope="col" > Disponibles </th>
+                    <th scope="col" > Operaciones </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for libro in Libro %}
+                <tr>
+                    <th scope="col"> {{ forloop.counter }} </th>
+                    <th> {{ libro.titulo }} </th>
+                    <th> {{ libro.autor }} </th>
+                    <th> {{ libro.tema }} </th>
+                    <th> {{ libro.ubicacion }} </th>
+                    <th> {{ libro.disponibles }} </th>
+                    <th> <a href="#" class="btn btn-info"> Prestar </a> </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     
-    <h1>Welcome User {{user.first_name}} </h1>
 {% endblock %}

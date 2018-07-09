@@ -5,7 +5,7 @@ from django.views.generic.edit import UpdateView
 from .forms import AutorForm
 from .models import Author
 
-from usuarios.mixins import AdminMixin
+from usuarios.mixins import AdminMixin, UserMixin
 
 # Create your views here.
 class AuthorAdminView(AdminMixin, ListView):
@@ -29,4 +29,10 @@ UpdateAuthorView = _update_or_create(UpdateView)
 class DeleteAuthorView(AdminMixin, DeleteView):
     model = Author
     success_url = reverse_lazy('autor:autores-admin')
+
+
+class AuthorUserView(UserMixin, ListView):
+    model = Author
+    context_object_name = "Autor"
+    template_name_suffix = '_list_user'
 
