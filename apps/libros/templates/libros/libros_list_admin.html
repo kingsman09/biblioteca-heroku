@@ -19,7 +19,7 @@
         <a href="#" class="nav-link"> Prestamos </a>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link"> Usuarios </a>
+        <a class="nav-link" href="{% url 'usuarios:list-users' %}" > Usuarios </a> 
     </li>
 
 {% endblock navbar_items %}
@@ -31,13 +31,15 @@
         <a href="{% url 'book:crear-libro' %}" class="btn btn-primary">Ingresar Libro </a>
     </div>
 
-    <form method="GET">
-        <input type="text" name="paginate_by"> 
-        <button type="submit"> Hecho</button>
-    </form>
+   
+        <form method="GET" class=" mt-2 justify-content-center">
+            <input type="text" name="paginate_by" > 
+            <button type="submit"> Hecho</button>
+        </form>
+    
     
     <div class="container">
-        <table class="table table-hover mt-3">
+        <table class="table table-hover mt-3" id="table-controller">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col"> # </th>

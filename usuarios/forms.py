@@ -20,3 +20,30 @@ class UserCreationForm(auth_forms.UserCreationForm):
             'zona',
             'imagen'
         ]
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fields in self.fields:
+            self.fields[fields].widget.attrs.update({'class': 'form-control'})
+
+class DetailForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = [
+                'email',
+                'username',
+                'first_name',
+                'last_name',
+                'celphone',
+                'gender',
+                'municipio',
+                'adress',
+                'birth_date',
+                'zona',
+                'imagen'
+            ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fields in self.fields:
+            self.fields[fields].widget.attrs.update({'class': 'form-control'})
+

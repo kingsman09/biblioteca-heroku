@@ -10,5 +10,7 @@ urlpatterns = [
 
     path('crear-libro/', local_views.CreateBookView.as_view(), name='crear-libro'),
     path('editar-libro<int:pk>/', local_views.UpdateBookView.as_view(), name='editar-libro'),
-    path('eliminar-libro<int:pk>', local_views.DeleteBookView.as_view(), name='eliminar-libro')
+    path('eliminar-libro<int:pk>', local_views.DeleteBookView.as_view(), name='eliminar-libro'),
+
+    # path('pruebas/', local_views.BookOfAuthorView.as_view(), name='prueba')
 ]

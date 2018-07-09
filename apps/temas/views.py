@@ -5,7 +5,7 @@ from .models import Temas
 from .forms import TemaForm
 from django.urls import reverse_lazy
 
-from usuarios.mixins import AdminMixin
+from usuarios.mixins import AdminMixin, UserMixin
 
 # Create your views here.
 class ThemeAdminView(AdminMixin, ListView):
@@ -26,3 +26,9 @@ UpdateThemeView = _update_or_create(UpdateView)
 class DeleteThemeView(AdminMixin, DeleteView):
     model = Temas
     success_url = reverse_lazy('temas:temas-admin')
+
+
+class ThemeUserView(UserMixin, ListView):
+    model = Temas
+    context_object_name = 'Temas'
+    template_name_suffix = '_list_user'

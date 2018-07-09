@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+<div>
+    <form method="post" enctype="multipart/form-data">
+            <div class="form-group col-md-10 mx-auto">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success"> Entrar</button>
+        </form>
+    </div>  
+</div>
+
+<script>
+    document.getElementById('id_imagen').setAttribute('accept', 'image/*')
+    
+</script>
+
+{% endblock %}

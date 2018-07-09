@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} Editar Perfil {% endblock %}
+
+<!--  items de navbar de administrador  -->
+{% block navbar_items %} 
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:user_index' %}">Libros <span class="sr-only">(current)</span></a>
+    </li> 
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'autor:autores-user' %}">Autores </a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'temas:temas-user' %}">Temas </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Prestamos</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'usuarios:user-edit' request.user.id %}">Perfil </a>
+    </li>
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group col-md-10 mx-auto">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-md btn-block btn-success mb-3  "> Change </button>
+        </div>
+        
+        </form> 
+        
+    </div>
+
+    <script>
+         document.getElementById('id_imagen').setAttribute('accept', 'image/*')
+    </script>
+
+
+{% endblock %}

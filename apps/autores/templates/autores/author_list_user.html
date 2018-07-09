@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} Autores {% endblock %}
+
+
+
+{% block navbar_items %} 
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:user_index' %}">Libros <span class="sr-only">(current)</span></a>
+    </li> 
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'autor:autores-user' %}">Autores </a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'temas:temas-user' %}">Temas </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Prestamos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'usuarios:user-edit' request.user.id %}">Perfil </a>
+    </li>
+{% endblock %}
+
+{% block content %} 
+
+
+
+<div class="container">
+    <table class="table table-hover mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"> Nombres </th>
+                <th scope="col"> Apellidos </th>
+                <th scope="col">  Nacionalidad </th>
+                <th scope="col"> Fecha de ingreso  </th>
+                <th scope="col"> Operaciones </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for autor in Autor %}
+                <tr>
+                    <th scope="row"> {{ autor.id }} </th>
+                    <th> {{ autor.nombre }} </th>
+                    <th> {{ autor.apellido }} </th>
+                    <th> {{ autor.nacionalidad }} </th>
+                    <th> {{ autor.fecha_registro|date:"l d M Y" }} </th>
+                    <th> <a href="#" class="btn btn-info"> Ver </a></th>
+                </tr>   
+                {% empty %}
+                <div class="container mt-2">
+                    <li> No existen autores registrados </li>
+                </div>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
