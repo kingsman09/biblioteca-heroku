@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %} Detalle de prestamo {% endblock title %}
+
+
+
+{% block content %}
+
+    <div class="container w-50 mt-5">
+        
+        <table class="table table-hover ">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"> Clasificacion</th>
+                    <th scope="col"> Libro </th>
+                </tr>
+                <tbody>
+                    <tr class="justify-content-center">
+                        <th> Libro </th>
+                        <th> {{ object.titulo }} </th>
+                       
+                    </tr>
+                    <tr>
+                        <th> Autor </th>
+                        <th> {{ object.autor }} </th>
+
+                    </tr>
+                    <tr>
+                        <th> Tema </th>
+                        <th> {{ object.tema }} </th>
+
+                    </tr>
+                    <tr>
+                        <th> Ubicacion </th>
+                        <th> {{ object.ubicacion }} </th>
+
+                    </tr>
+                    <tr>
+                        <th> Disponibles </th>
+                        <th> {{ object.disponibles }} </th>
+
+                    </tr>
+                    <tr>
+                        <th> Fecha de prestamo </th>
+                        <th> {{ fecha_prestamo.day }} / {{ fecha_prestamo.month}} / {{ fecha_prestamo.year}} </th>
+
+                    </tr>
+                    <tr>
+                        <th> Fecha de devolucion </th>
+                        <th> {{ fecha_devolucion }} </th>
+                    </tr>
+                </tbody>
+
+            </thead>
+
+        </table>
+       
+       <form method="POST">
+           {% csrf_token %}
+           <input type="hidden" name='book_id' value="{{ object.id }}">
+           <button type="submit"> Prestar </button>
+       </form>
+
+
+<h1> {{ Usuario.email }}  </h1>
+
+    </div>
+  
+
+
+
+{% endblock  %}
+

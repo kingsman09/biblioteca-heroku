@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from apps.temas.models import Temas
-from models.paises.models import Pais
 from django.utils.timezone import now
 
+from models.paises.models import Pais
+from apps.temas.models import Temas
+from apps.libros import models as lm
 
-# Create your models here.
 
 class Author(models.Model):
     nombre = models.CharField(_('nombre'), max_length=150)
@@ -22,4 +22,6 @@ class Author(models.Model):
     def __str__(self):
         return f'{self.nombre} {self.apellido}'
 
-
+    @property
+    def books(self):
+        return len(lm.Libros.objects.filter(autor__id=self.id))

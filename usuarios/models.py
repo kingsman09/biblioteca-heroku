@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _ 
 
 from models.paises.models import Municipio
+from models.paises.models import Departamento
 
 # Create your models here.
 class User(AbstractUser):
@@ -15,6 +16,7 @@ class User(AbstractUser):
     ])
     birth_date = models.DateField(blank=True, null=True)
     cui = models.PositiveIntegerField(blank=True, null=True)
+    departamento = models.ForeignKey(Departamento, on_delete=models.PROTECT, null=True)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True)
     zona = models.PositiveIntegerField(_('zona del municipio'), null=True)
     escolaridad = models.PositiveIntegerField(_('escolaridad'), default=0, choices=[

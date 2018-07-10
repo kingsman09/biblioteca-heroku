@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %} Mis prestamos {% endblock %}
+
+{% block navbar_items %}
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:user_index' %}">Libros <span class="sr-only">(current)</span></a>
+    </li> 
+    <li class="nav-item  ">
+        <a class="nav-link" href="{% url 'autor:autores-user' %}">Autores </a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'temas:temas-user' %}">Temas </a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'prestamos:prestamos-list' %}">Prestamos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'usuarios:user-edit' request.user.id %}">Perfil </a>
+    </li>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container mt-3 ">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col"> Codigo </th>
+                <th scope="col"> Libro </th>
+                <th scope="col"> Autor </th>
+                <th scope="col"> Tema </th>
+                <th scope="col"> Prestamo </th>
+                <th scope="col"> Devolucion </th>
+                <th scope="col"> Estado </th>
+            </tr>
+            <tbody>
+                {% for prestamo in Prestamo %}    
+                    <tr>
+                        <th scope="col"> {{ forloop.counter }} </th>
+                        <th> {{ prestamo.token }} </th>
+                        <th> {{ prestamo.libro.titulo }} </th>
+                        <th> {{ prestamo.libro.autor }} </th>
+                        <th> {{ prestamo.libro.tema }} </th>
+                        <th> {{ prestamo.fecha_prestamo|date:"d M Y" }} </th>
+                        <th> {{ prestamo.fecha_devolucion|date:"d M Y" }} </th>
+                        {% if prestamo.estado == 1 %}
+                        <th> Prestado </th>
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </thead>
+    </table>
+</div>
+
+
+{% endblock %}

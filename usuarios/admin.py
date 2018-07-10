@@ -9,7 +9,7 @@ class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
          (None, {'fields': ('username', 'password', 'email')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'cui', 'birth_date', 'gender', 'celphone', 
-                                         'adress', 'zona', 'municipio', 'escolaridad', 'establecimiento','imagen')}),
+                                         'adress', 'zona', 'municipio', 'departamento','escolaridad', 'establecimiento','imagen')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),

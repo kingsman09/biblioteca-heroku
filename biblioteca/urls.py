@@ -25,4 +25,5 @@ urlpatterns = [
     path('libros/', include('apps.libros.urls')),
     path('temas/', include('apps.temas.urls')),
     path('autores/',include('apps.autores.urls')),
+    path('prestamos/', include('apps.prestamos.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
