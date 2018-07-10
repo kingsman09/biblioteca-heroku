@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, CreateView, ListView, DeleteView
 from django.views.generic.edit import UpdateView
 from usuarios.mixins import AdminMixin, UserMixin
@@ -14,7 +14,7 @@ from django.core import serializers
 class AdminBookList(AdminMixin, ListView):
     model = Libros
     context_object_name = 'Libro'
-    paginate_by = 1
+    paginate_by = 5
     template_name_suffix = '_list_admin'
     queryset = Libros.objects.all()
 
@@ -48,7 +48,9 @@ class UserBookList(UserMixin, ListView):
     context_object_name = 'Libro'
     template_name = 'libros/user_list.html'
 
-# class BookOfAuthorView(UserMixin, ListView):
+
+
+
 #     model = Libros
 #     context_object_name = 'Name'
 #     template_name_suffix = '_pruebas'

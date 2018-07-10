@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, ListView, DeleteView, TemplateView, DetailView
 from django.views.generic.edit import UpdateView
 from .forms import AutorForm
 from .models import Author
+from apps.libros.models import Libros
 
 from usuarios.mixins import AdminMixin, UserMixin
 
@@ -35,4 +36,12 @@ class AuthorUserView(UserMixin, ListView):
     model = Author
     context_object_name = "Autor"
     template_name_suffix = '_list_user'
+
+
+
+def books(request, pk):
+    book = Libros.objects.filter(autor__id=pk)
+    # book = book.objects.all()
+    context = {'Book': book}
+    return render(request, "autores/author_prueba.html", context)
 

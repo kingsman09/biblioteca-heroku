@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} Libros del autor  {% endblock %}
+
+{% block navbar_items %}
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'book:user_index' %}">Libros <span class="sr-only">(current)</span></a>
+    </li> 
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'autor:autores-user' %}">Autores </a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'temas:temas-user' %}">Temas </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Prestamos</a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'usuarios:user-edit' request.user.id %}">Perfil </a>
+    </li>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container mt-3">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" > #  </th>
+                    <th scope="col" > Libro </th>
+                    <th scope="col" > Autor </th>
+                    <th scope="col" > Tema </th>
+                    <th scope="col" > Ubicacion </th>
+                    <th scope="col" > Disponibles </th>
+                    <th scope="col" > Operaciones </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in Book %}
+                    <tr>
+                        <th scope="col"> {{ forloop.counter }} </th>
+                        <th> {{ book.titulo }} </th>
+                        <th> {{ book.autor }} </th>
+                        <th> {{ book.tema }} </th>
+                        <th> {{ book.ubicacion }} </th>
+                        
+                        <th> {{ book.disponibles }} </th>
+                        <th> <a href="#" class="btn btn-info"> Prestar </a> </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
