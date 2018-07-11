@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .forms import UserCreationForm, DetailForm
 from django.views.generic import CreateView, View, ListView, DetailView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
-from django.urls import reverse_lazy
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
@@ -29,6 +28,8 @@ class IndexView(LoginRequiredMixin, View):
         regular_user = Group.objects.get(name='user')
         if regular_user in user.groups.all():
             return redirect(reverse_lazy('book:user_index'))    
+
+
 
 
 class SignInView(LoginView):

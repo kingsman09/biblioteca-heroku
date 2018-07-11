@@ -7,6 +7,7 @@ from apps.libros.models import Libros
 from django.utils.timezone import now
 from datetime import datetime, timedelta
 from django.http import HttpResponse
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 def PrestamoOfUser(request):
@@ -25,11 +26,21 @@ class PrestarLibroView(UserMixin, DetailView):
 
     @staticmethod
     def post(request, *args, **kwargs):
-        libro = Libros.objects.get(pk=request.POST.get('book_id'))
-        Prestamo.objects.create(
-            libro=libro,
-            usuario=request.user)
-        return redirect(reverse_lazy('book:user_index'))
+        usuario_prestamo = Prestamo.objects.filter(usuario=request.user)
+        print(len(usuario_prestamo))
+        if len(usuario_prestamo) < 10:
+            libro = Libros.objects.get(pk=request.POST.get('book_id'))
+            token = request.POST.get('token')
+            Prestamo.objects.create(
+                libro=libro,
+                usuario=request.user,
+                token = token)
+            libro.disponibles -= 1 
+            libro.save()
+
+            return redirect(reverse_lazy('book:user_index'))
+        else:
+            raise ValidationError('Llego a su limite')
 
 
     # defget(self, request, pk):

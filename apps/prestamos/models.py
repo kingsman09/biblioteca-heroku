@@ -7,6 +7,7 @@ from django.utils.timezone import now
 from datetime import datetime, timedelta
 
 
+
 # Create your models here.
 class Prestamo(models.Model):
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

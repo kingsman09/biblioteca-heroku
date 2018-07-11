@@ -3,7 +3,7 @@ from apps.temas.models import Temas
 from apps.autores.models import Author
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-
+from .validators import limit
 
 
 # Create your models here.
@@ -12,7 +12,7 @@ class Libros(models.Model):
     autor = models.ForeignKey(Author, on_delete=models.PROTECT)
     tema = models.ForeignKey(Temas, on_delete=models.PROTECT)
     ubicacion = models.CharField(_('ubicacion'), max_length=200)
-    disponibles = models.PositiveIntegerField(_('libros disponibles'), default=1)
+    disponibles = models.PositiveIntegerField(_('libros disponibles'), validators=[limit], default=1, )
     fecha_registro = models.DateField(_('Fecha de ingreso'), default=now())
 
     class Meta: 

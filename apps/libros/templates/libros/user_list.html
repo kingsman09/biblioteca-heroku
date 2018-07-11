@@ -47,7 +47,11 @@
                     <th> {{ libro.tema }} </th>
                     <th> {{ libro.ubicacion }} </th>
                     <th> {{ libro.disponibles }} </th>
+                    {% if libro.disponibles > 0 %}
                     <th> <a href="{% url 'prestamos:pre-prestamo' libro.id %}" class="btn btn-info"> Prestar </a> </th>
+                    {% else %}
+                    <th> No disponible </th>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

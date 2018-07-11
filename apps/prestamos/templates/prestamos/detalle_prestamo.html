@@ -58,11 +58,28 @@
        <form method="POST">
            {% csrf_token %}
            <input type="hidden" name='book_id' value="{{ object.id }}">
+           <input type="hidden" name='token' id="token">
            <button type="submit"> Prestar </button>
        </form>
 
 
 <h1> {{ Usuario.email }}  </h1>
+
+<script>
+    var allowed_chars = ['a', 'b','c','d','e','f','g','h','k','m','n','p','q','r','s','t','u','v','x','y','z',
+                        'A', 'B','C','D','E','F','G','H','K','M','N','P','Q','R','S','T','U','V','X','Y','Z',
+                        '1','2','3','4','5','6','7','8','9']
+
+    var token = "";
+
+    for(var i=0; i<15; i++){
+        var numero = Math.floor(Math.random() * allowed_chars.length)
+        token += allowed_chars[numero]
+    }
+
+    $('#token').val(token)
+
+</script>
 
     </div>
   
