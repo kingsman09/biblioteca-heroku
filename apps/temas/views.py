@@ -4,6 +4,7 @@ from django.views.generic.edit import UpdateView
 from .models import Temas
 from .forms import TemaForm
 from django.urls import reverse_lazy
+from apps.libros.models import Libros
 
 from usuarios.mixins import AdminMixin, UserMixin
 
@@ -11,6 +12,7 @@ from usuarios.mixins import AdminMixin, UserMixin
 class ThemeAdminView(AdminMixin, ListView):
     model = Temas
     context_object_name = 'Temas'
+    paginate_by = 5
 
 
 def _update_or_create(view):
@@ -32,3 +34,9 @@ class ThemeUserView(UserMixin, ListView):
     model = Temas
     context_object_name = 'Temas'
     template_name_suffix = '_list_user'
+
+
+def libro_tema(request, pk):
+    books = Libros.objects.filter(tema__id=pk)
+    context = {'Libros': books}
+    return render(request, 'temas/libros_de_temas.html', context)

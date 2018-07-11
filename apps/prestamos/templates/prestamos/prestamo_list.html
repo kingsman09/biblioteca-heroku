@@ -25,8 +25,8 @@
 {% block content %}
 
 
-<div class="container mt-3 ">
-    <table class="table table-hover">
+<div class="container mt-3 " style="height: 350px;">
+    <table class="table table-hover" id="table-controller">
         <thead class="thead-dark">
             <tr>
                 <th scope="col"> # </th>
@@ -39,7 +39,9 @@
                 <th scope="col"> Estado </th>
             </tr>
             <tbody>
+                
                 {% for prestamo in Prestamo %}    
+                {% if prestamo.estado == 1 or prestamo.estado == 2 %}
                     <tr>
                         <th scope="col"> {{ forloop.counter }} </th>
                         <th> {{ prestamo.token }} </th>
@@ -52,12 +54,68 @@
                         <th> Prestado </th>
                         {% endif %}
                     </tr>
+                    {% endif %} 
 
                 {% endfor %}
+                
             </tbody>
         </thead>
     </table>
 </div>
+
+
+
+<div class="container mt-3 ">
+        <table class="table table-hover" id="table-controller2">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col"> Codigo </th>
+                    <th scope="col"> Libro </th>
+                    <th scope="col"> Autor </th>
+                    <th scope="col"> Tema </th>
+                    <th scope="col"> Prestamo </th>
+                    <th scope="col"> Devolucion </th>
+                    <th scope="col"> Estado </th>
+                </tr>
+                <tbody>
+                    {% for prestamo in Prestamo %}    
+                    {% if prestamo.estado == 3 or prestamo.estado == 4 %}
+                        <tr>
+                            <th scope="col"> {{ forloop.counter }} </th>
+                            <th> {{ prestamo.token }} </th>
+                            <th> {{ prestamo.libro.titulo }} </th>
+                            <th> {{ prestamo.libro.autor }} </th>
+                            <th> {{ prestamo.libro.tema }} </th>
+                            <th> {{ prestamo.fecha_prestamo|date:"d M Y" }} </th>
+                            <th> {{ prestamo.fecha_devolucion|date:"d M Y" }} </th>
+                            {% if prestamo.estado == 1 %}
+                            <th> Prestado </th>
+                            {% endif %}
+                            {% if prestamo.estado == 2 %}
+                            <th> Mora </th>
+                            {% endif %}
+                            {% if prestamo.estado == 3 %}
+                            <th> Devuelto </th>
+                            {% endif %}
+                        </tr>
+                        {% endif %} 
+
+    
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+
+    <script>
+       $(document).ready(function(){
+            $('#table-controller2').DataTable();
+            $("#table-controller2_paginate").hide();
+            $("#table-controller2_length").hide();
+            $("#table-controller2_info").hide();
+        });
+    </script>
 
 
 {% endblock %}

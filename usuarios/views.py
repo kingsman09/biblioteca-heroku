@@ -72,6 +72,7 @@ class UserListView(AdminMixin, ListView):
     model = get_user_model() 
     queryset = model.objects.filter(groups__name__in=['user'])   
     context_object_name = 'Users'
+    paginate_by = 5
 
 class UserDetailView(AdminMixin, UpdateView):
     model = get_user_model()

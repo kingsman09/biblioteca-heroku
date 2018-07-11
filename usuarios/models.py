@@ -8,17 +8,17 @@ from models.paises.models import Departamento
 # Create your models here.
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    adress = models.CharField(max_length=100, blank=True, null=True)
-    celphone = models.PositiveIntegerField(blank=True, null=True)
+    adress = models.CharField(max_length=100 , null=True, blank=True)
+    celphone = models.PositiveIntegerField(blank=False)
     gender = models.BooleanField(default=True, choices = [
         (True, 'Male'),
         (False, 'Female'),
     ])
-    birth_date = models.DateField(blank=True, null=True)
-    cui = models.PositiveIntegerField(blank=True, null=True)
+    birth_date = models.DateField()
+    cui = models.PositiveIntegerField(unique=True)
     departamento = models.ForeignKey(Departamento, on_delete=models.PROTECT, null=True)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True)
-    zona = models.PositiveIntegerField(_('zona del municipio'), null=True)
+    zona = models.PositiveIntegerField(_('zona del municipio') )
     escolaridad = models.PositiveIntegerField(_('escolaridad'), default=0, choices=[
         ( 1, 'None' ),
         ( 2, 'Primaria'),

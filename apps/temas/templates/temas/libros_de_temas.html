@@ -1,26 +1,27 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
+{% block title %} Libros del autor  {% endblock %}
 
-{% block navbar_items %} 
+{% block navbar_items %}
+
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'book:user_index' %}">Libros <span class="sr-only">(current)</span></a>
     </li> 
-    <li class="nav-item  ">
+    <li class="nav-item ">
         <a class="nav-link" href="{% url 'autor:autores-user' %}">Autores </a>
     </li>
     <li class="nav-item ">
         <a class="nav-link" href="{% url 'temas:temas-user' %}">Temas </a>
     </li>
-    <li class="nav-item ">
+    <li class="nav-item">
         <a class="nav-link" href="{% url 'prestamos:prestamos-list' %}">Prestamos</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item ">
         <a class="nav-link" href="{% url 'usuarios:user-edit' request.user.id %}">Perfil </a>
     </li>
 
-{% endblock %}
 
-{% block title %}  Libros {% endblock %}
+{% endblock %}
 
 
 {% block content %}
@@ -39,24 +40,20 @@
                 </tr>
             </thead>
             <tbody>
-                {% for libro in Libro %}
-                <tr>
-                    <th scope="col"> {{ forloop.counter }} </th>
-                    <th> {{ libro.titulo }} </th>
-                    <th> {{ libro.autor }} </th>
-                    <th> {{ libro.tema }} </th>
-                    <th> {{ libro.ubicacion }} </th>
-                    <th> {{ libro.disponibles }} </th>
-                    
-                    {% if libro.disponibles > 0 %}
-                        <th> <a href="{% url 'prestamos:pre-prestamo' libro.id %}" class="btn btn-info"> Prestar </a> </th>
-                    {% else %}
-                        <th> No disponible </th>
-                    {% endif %}
-                </tr>
+                {% for book in Libros %}
+                    <tr>
+                        <th scope="col"> {{ forloop.counter }} </th>
+                        <th> {{ book.titulo }} </th>
+                        <th> {{ book.autor }} </th>
+                        <th> {{ book.tema }} </th>
+                        <th> {{ book.ubicacion }} </th>
+                        
+                        <th> {{ book.disponibles }} </th>
+                        <th> <a href="{% url 'prestamos:pre-prestamo' book.id %}" class="btn btn-info"> Prestar </a> </th>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    
+
 {% endblock %}

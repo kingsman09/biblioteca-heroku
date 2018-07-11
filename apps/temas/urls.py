@@ -12,5 +12,7 @@ urlpatterns = [
     path('editar-tema<int:pk>/', views.UpdateThemeView.as_view(), name='editar-tema'),
 
     path('temas-user/', views.ThemeUserView.as_view(), name='temas-user'),
+
+    path('libros-temas<int:pk>/', views.libro_tema, name='libro-tema')
     
 ]

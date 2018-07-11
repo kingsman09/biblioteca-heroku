@@ -54,13 +54,26 @@
             </thead>
 
         </table>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}> <h2>{{ message }} </h2></li>
+                {% endfor %}
+            </ul> 
+            <a href="{% url 'book:user_index' %}" class="btn btn-warning btn-block"> Atras </a>
+        {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name='book_id' value="{{ object.id }}">
+            <input type="hidden" name='token' id="token">
+            <button type="submit"> Prestar </button>
+        </form>
+
+               
+        {% endif %}
        
-       <form method="POST">
-           {% csrf_token %}
-           <input type="hidden" name='book_id' value="{{ object.id }}">
-           <input type="hidden" name='token' id="token">
-           <button type="submit"> Prestar </button>
-       </form>
+       
 
 
 <h1> {{ Usuario.email }}  </h1>

@@ -49,7 +49,7 @@
                         <th> {{ book.ubicacion }} </th>
                         
                         <th> {{ book.disponibles }} </th>
-                        <th> <a href="#" class="btn btn-info"> Prestar </a> </th>
+                        <th> <a href="{% url 'prestamos:pre-prestamo' book.id %}" class="btn btn-info"> Prestar </a> </th>
                     </tr>
                 {% endfor %}
             </tbody>

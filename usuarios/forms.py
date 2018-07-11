@@ -14,9 +14,13 @@ class UserCreationForm(auth_forms.UserCreationForm):
             'password2',
             'celphone',
             'gender',
+            'cui',
+            'departamento',
             'municipio',
             'adress',
             'birth_date',
+            'escolaridad',
+            'establecimiento',
             'zona',
             'imagen'
         ]
@@ -29,18 +33,22 @@ class DetailForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = [
-                'email',
-                'username',
-                'first_name',
-                'last_name',
-                'celphone',
-                'gender',
-                'municipio',
-                'adress',
-                'birth_date',
-                'zona',
-                'imagen'
-            ]
+            'email',
+            'username',
+            'first_name',
+            'last_name',
+            'celphone',
+            'gender',
+            'cui',
+            'departamento',
+            'municipio',
+            'adress',
+            'birth_date',
+            'escolaridad',
+            'establecimiento',
+            'zona',
+            'imagen'
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

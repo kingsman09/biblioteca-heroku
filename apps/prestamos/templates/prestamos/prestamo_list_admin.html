@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %} Mis prestamos {% endblock %}
+
+{% block navbar_items %}
+<li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
+    </li>
+    <li class="nav-item active">
+        <a href="{% url 'prestamos:prestamo-admin' %}" class="nav-link"> Prestamos </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'usuarios:list-users' %}" > Usuarios </a> 
+    </li>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container mt-3" style="height: 350px;">
+    <table class="table table-hover" id="table-controller">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col"> Codigo </th>
+                <th scope="col"> Libro </th>
+                <th scope="col"> Autor </th>
+                <th scope="col"> Tema </th>
+                <th scope="col"> Prestamo </th>
+                <th scope="col"> Devolucion </th>
+                <th scope="col">  Estado</th>
+                <th scope="col"> Operaciones</th>
+            </tr>
+            <tbody>
+                    
+                {% for prestamo in Prestamo %}    
+                
+                    <tr>
+                        <th scope="col"> {{ forloop.counter }} </th>
+                        <th> {{ prestamo.token }} </th>
+                        <th> {{ prestamo.libro.titulo }} </th>
+                        <th> {{ prestamo.libro.autor }} </th>
+                        <th> {{ prestamo.libro.tema }} </th>
+                        <th> {{ prestamo.fecha_prestamo|date:"d M Y" }} </th>
+                        <th> {{ prestamo.fecha_devolucion|date:"d M Y" }} </th>
+                        {% if prestamo.estado == 1 %}
+                        <th style="color: blue;"> Prestado </th>
+                        <th> <a href="{% url 'prestamos:devolver' prestamo.id %}" class="btn btn-info"> Devolver </a> </th>
+                        {% endif %}
+                        {% if prestamo.estado == 2 %}
+                        <th style="color: red;"> Mora </th>
+                        {% endif %}
+                        {% if prestamo.estado == 3 %}
+                        <th style="color: green;"> Devuelto </th>
+                        {% endif %}
+                        {% if prestamo.estado == 4 %}
+                        <th > Devuelto con mora </th>
+                        {% endif %}
+                        
+                        
+                    </tr>   
+                {% endfor %}
+            </tbody>
+        </thead>
+    </table>
+
+    <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+
+                    <li class="page-item"> <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span class="page-link">&laquo; </span> </li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active page-item"><span class="page-link"> {{ i }} <span class="sr-only">current</span></span></li>
+                    {% else %}
+                        <li class="page-item"><a href="?page={{ i }}" class="page-link"> {{ i }} </a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled" class="page-item"> <span class="page-link">&raquo;</span> </li>
+                {% endif %}
+            </ul>
+        </nav>
+</div>
+
+
+
+
+{% endblock %}

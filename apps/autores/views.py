@@ -13,6 +13,7 @@ class AuthorAdminView(AdminMixin, ListView):
     model = Author
     context_object_name = 'Autor'
     template_name_suffix = '_list_admin'
+    paginate_by = 5
 
 
 def _update_or_create(view):
@@ -36,6 +37,7 @@ class AuthorUserView(UserMixin, ListView):
     model = Author
     context_object_name = "Autor"
     template_name_suffix = '_list_user'
+    paginate_by = 5
 
 
 
