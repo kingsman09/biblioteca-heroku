@@ -29,6 +29,7 @@
     </div>
 
     <div class="container">
+        <div class="table-responsive">
         <table class="table table-hover mt-4" id="table-controller">
             <thead class="thead-dark">
                 <tr>
@@ -55,13 +56,14 @@
                     </tr>
                     {% empty %}
                     <div class="container mt-2">
-                        <li> No existen temas registrados </li>
+                        <li> No existen usuarios registrados </li>
                     </div>
                 
                 {% endfor %}
                 
             </tbody>
         </table>
+        </div>
         <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     {% if page_obj.has_previous %}

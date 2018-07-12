@@ -26,37 +26,39 @@
 {% block content %}
 
     <div class="container mt-3">
-        <table class="table table-hover" id="table-controller">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" > #  </th>
-                    <th scope="col" > Libro </th>
-                    <th scope="col" > Autor </th>
-                    <th scope="col" > Tema </th>
-                    <th scope="col" > Ubicacion </th>
-                    <th scope="col" > Disponibles </th>
-                    <th scope="col" > Operaciones </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for libro in Libro %}
-                <tr>
-                    <th scope="col"> {{ forloop.counter }} </th>
-                    <th> {{ libro.titulo }} </th>
-                    <th> {{ libro.autor }} </th>
-                    <th> {{ libro.tema }} </th>
-                    <th> {{ libro.ubicacion }} </th>
-                    <th> {{ libro.disponibles }} </th>
-                    
-                    {% if libro.disponibles > 0 %}
-                        <th> <a href="{% url 'prestamos:pre-prestamo' libro.id %}" class="btn btn-info"> Prestar </a> </th>
-                    {% else %}
-                        <th> No disponible </th>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive-md">
+            <table class="table table-hover table-sm text-center" id="table-controller">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" > #  </th>
+                        <th scope="col" > Libro </th>
+                        <th scope="col" > Autor </th>
+                        <th scope="col" > Tema </th>
+                        <th scope="col" > Ubicacion </th>
+                        <th scope="col" > Disponibles </th>
+                        <th scope="col" > Operaciones </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for libro in Libro %}
+                    <tr>
+                        <th scope="col"> {{ forloop.counter }} </th>
+                        <th> {{ libro.titulo }} </th>
+                        <th> {{ libro.autor }} </th>
+                        <th> {{ libro.tema }} </th>
+                        <th> {{ libro.ubicacion }} </th>
+                        <th> {{ libro.disponibles }} </th>
+                        
+                        {% if libro.disponibles > 0 %}
+                            <th> <a href="{% url 'prestamos:pre-prestamo' libro.id %}" class="btn btn-info"> Prestar </a> </th>
+                        {% else %}
+                            <th> No disponible </th>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
     
 {% endblock %}
