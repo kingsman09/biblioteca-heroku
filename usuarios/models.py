@@ -36,4 +36,4 @@ class User(AbstractUser):
 
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'celphone']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'celphone', 'birth_date', 'zona']
