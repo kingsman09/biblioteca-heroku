@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import now
+from datetime import datetime, timedelta
 
 from models.paises.models import Pais
 from apps.temas.models import Temas
@@ -17,7 +18,7 @@ class Author(models.Model):
     ])
     nacimiento = models.DateField(_('fecha de nacimiento'))
     fallecimiento = models.DateField(_('fecha de fallecimiento'),null=True, blank=True)
-    fecha_registro = models.DateField(_('fecha de registro'), default=now())
+    fecha_registro = models.DateField(_('fecha de registro'), default=datetime.now())
 
     def __str__(self):
         return f'{self.nombre} {self.apellido}'
