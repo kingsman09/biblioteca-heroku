@@ -9,13 +9,13 @@ from models.paises.models import Departamento
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     adress = models.CharField(max_length=100 , null=True, blank=True)
-    celphone = models.PositiveIntegerField(blank=False, null=True)
+    celphone = models.PositiveIntegerField(blank=True, null=True)
     gender = models.BooleanField(default=True, choices = [
         (True, 'Male'),
         (False, 'Female'),
     ])
     birth_date = models.DateField(blank=True, null=True)
-    cui = models.PositiveIntegerField(unique=True, blank=True, null=True)
+    cui = models.PositiveIntegerField(blank=True, null=True)
     departamento = models.ForeignKey(Departamento, on_delete=models.PROTECT,blank=True,  null=True)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, blank=True, null=True)
     zona = models.PositiveIntegerField(_('zona del municipio'), blank=True, null=True)
@@ -36,4 +36,4 @@ class User(AbstractUser):
 
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'celphone', 'birth_date', 'zona']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
