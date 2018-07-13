@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+
+{% block title %} Crear Usuario {% endblock %}
+ 
 {% block content %}
   
 <div>
@@ -16,5 +19,10 @@
     document.getElementById('id_imagen').setAttribute('accept', 'image/*')
     
 </script>
+<style>
+    .nav-link{
+        display: none;
+    }
+</style>
 
 {% endblock %}

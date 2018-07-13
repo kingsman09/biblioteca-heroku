@@ -4,18 +4,26 @@
 
 
 {% block content %}
-<div class="container">
+<div>
+    <center>
     <form method="POST" class="px-5 py-3">
+        <div class="form-group mx-auto">
         {% csrf_token %}
         {{ form.as_p }} 
         <button type="submit" class="btn btn-success"> Login </button>
-       
+        </div>  
     </form>
     <a href="{% url 'usuarios:sign_up_admin' %}" class="btn btn-link" align=center>Registrate como administrador</a> 
     <a href="{% url 'usuarios:sign_up_user' %}" class="btn btn-link" align=center>Registrate como usuario</a>
+</center>   
 </div>
 
+<script>
+    document.getElementById('id_username').setAttribute('class', 'form-control col-md-4')
+    document.getElementById('id_password').setAttribute('class', 'form-control col-md-4')
 
+
+</script>
 <style>
     .nav-link{
         display: none;

@@ -27,7 +27,13 @@ class UserCreationForm(auth_forms.UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fields in self.fields:
-            self.fields[fields].widget.attrs.update({'class': 'form-control'})
+            self.fields[fields].widget.attrs.update({
+                'class': 'form-control',
+                'required': '',
+                })
+        self.fields['establecimiento'].widget.attrs.update({'required': False})
+        self.fields['imagen'].widget.attrs.update({'required': False})
+        self.fields['cui'].widget.attrs.update({'max_length': 13})
 
 class DetailForm(forms.ModelForm):
     class Meta:
