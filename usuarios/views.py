@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
 from .forms import UserCreationForm, DetailForm
 from django.views.generic import CreateView, View, ListView, DetailView
 from django.views.generic.edit import UpdateView
@@ -10,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from .mixins import AdminMixin, UserMixin
 from .models import User
+from apps.libros.models import Biblioteca
 
 
 # Create your views here.
@@ -33,7 +36,25 @@ class IndexView(LoginRequiredMixin, View):
 
 
 class SignInView(LoginView):
+    
+    
+    @staticmethod
+    def get(request):
+        bibliotecas = Biblioteca.objects.all()
+        return render(request, 'usuarios/login.html', {'bibliotecas':bibliotecas})
+
+    # @staticmethod
+    # def post(request):
+    #     data = request.POST
+    #     username = data.get('biblioteca')
+    #     return JsonResponse({'biblioteca': username})
+
     template_name = 'usuarios/login.html'
+        
+
+
+
+        
 
 
 def _sign_up(name):
@@ -50,9 +71,7 @@ def _sign_up(name):
 
                 if 'imagen' in self.request.FILES:
                     user.imagen = self.request.FILES.get('imagen')
-
-                # user.is_superuser = True
-                
+       
                 user.save()
                 form.save()
 
@@ -92,8 +111,6 @@ class UserUpdateView(UserMixin, UpdateView):
             if 'imagen' in self.request.FILES:
                 user.imagen = self.request.FILES.get('imagen')
 
-            # user.is_superuser = True
-            
             user.save()
             form.save()
 

@@ -9,6 +9,9 @@ class BookCreationForm(forms.ModelForm):
             'titulo',
             'autor',
             'tema',
+            'biblioteca',
             'ubicacion',
             'disponibles',
         )
+
+

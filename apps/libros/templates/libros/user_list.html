@@ -58,7 +58,14 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <input type="hidden" id="biblioteca_id" name="biblio_id">
         </div>
     </div>
+
+
+    <script>
+        var id = localStorage.getItem('biblioteca_actual')
+        $('#biblioteca_id').val(id)
+        </script>
     
 {% endblock %}

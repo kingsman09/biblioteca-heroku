@@ -1,16 +1,30 @@
+
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}  Login {% endblock %}
 
 
+
+
 {% block content %}
+
+
+
 <div>
     <center>
     <form method="POST" class="px-5 py-3">
         <div class="form-group mx-auto">
         {% csrf_token %}
-        {{ form.as_p }} 
-        <button type="submit" class="btn btn-success"> Login </button>
+        <p><label for="id_username">Email:</label> <input type="text" name="username" autofocus maxlength="254" required id="id_username" /></p>
+        <p><label for="id_password">Password:</label> <input type="password" name="password" required id="id_password" /></p> 
+        <select class="form-control col-md-4 mb-2" id="slc_biblioteca" name="slc_biblioteca"> 
+            {% for biblioteca in bibliotecas %}
+
+            <option value="{{ biblioteca.id }}"> {{ biblioteca.nombre }} </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-success" > Login </button>
         </div>  
     </form>
     <a href="{% url 'usuarios:sign_up_admin' %}" class="btn btn-link" align=center>Registrate como administrador</a> 
@@ -22,8 +36,17 @@
     document.getElementById('id_username').setAttribute('class', 'form-control col-md-4')
     document.getElementById('id_password').setAttribute('class', 'form-control col-md-4')
 
+    $('button').on('click', function(evt){
+        // evt.preventDefault()
+        var biblioteca = $('#slc_biblioteca').val()
+        localStorage.setItem('biblioteca_actual', biblioteca)
 
+    })
+
+    
 </script>
+
+<script src="{% static 'js/login.js' %}"></script>
 <style>
     .nav-link{
         display: none;

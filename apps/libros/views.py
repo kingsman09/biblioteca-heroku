@@ -1,32 +1,31 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, CreateView, ListView, DeleteView
+from django.views.generic import TemplateView, CreateView, ListView, DeleteView, View
 from django.views.generic.edit import UpdateView
 from usuarios.mixins import AdminMixin, UserMixin
-from .models import Libros
+from .models import Libros, Biblioteca
 from apps.autores.views import AuthorUserView
 from apps.autores.models import Author
 from .forms import BookCreationForm
 from django.urls import reverse_lazy
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 
 # Create your views here.
-class AdminBookList(AdminMixin, ListView):
+class AdminBookList(AdminMixin,ListView):
     model = Libros
     context_object_name = 'Libro'
     paginate_by = 5
+    
     template_name_suffix = '_list_admin'
-    queryset = Libros.objects.all()
 
-    # def get_paginate_by(self, queryset):
-    #     try:
-    #         paginate_by = self.request.GET.get('paginate_by', 5)
-    #         paginate_by = int(paginate_by)
-    #     except ValueError:
-    #         paginate_by = 5
-    #     finally:
-    #         return paginate_by
 
+    # def post(self, request):
+    #     biblioteca = request.POST.get('biblio_id')
+    #     return biblioteca
+    
+    # biblioteca1 = post
+
+  
 
 def _update_or_create(view):
     class View(AdminMixin, view):
@@ -47,16 +46,30 @@ class UserBookList(UserMixin, ListView):
     model = Libros
     context_object_name = 'Libro'
     template_name = 'libros/user_list.html'
+    # queryset = Libros.objects.filter(biblioteca_id=1)
+
+
+class MostrarBibliotecas(ListView):
+    model = Biblioteca
+    context_object_name = 'Bibliotecas'
+    template_name_suffix = '_list_bibliotecas'
 
 
 
+class CrearBiblioteca(View):
+    @staticmethod
+    def get(request):
+        return render(request, 'bibliotecas/crear_biblioteca.html')
 
-#     model = Libros
-#     context_object_name = 'Name'
-#     template_name_suffix = '_pruebas'
+    @staticmethod
+    def post(request):
+        data = request.POST
+        Biblioteca.objects.create(
+            nombre = data.get('nombre'),
+            descripcion = data.get('descripcion'),
+            ubicacion = data.get('ubicacion'),
+            latitud = data.get('latitud'),
+            longitud = data.get('longitud'),
+            )
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(*kwargs)
-#         context['titulo'] = Libros.objects.filter(autor__nombre__exact='walter')
-#         serial = serializers.serialize('json' , context)
-#         return JsonResponse(serial)
+        return JsonResponse({"data": data})
