@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.http import JsonResponse, HttpResponse
-from django.core import serializers
+from django.http import JsonResponse
 from .forms import UserCreationForm, DetailForm
 from django.views.generic import CreateView, View, ListView, DetailView
 from django.views.generic.edit import UpdateView
@@ -36,25 +35,16 @@ class IndexView(LoginRequiredMixin, View):
 
 
 class SignInView(LoginView):
-    
-    
-    @staticmethod
-    def get(request):
-        bibliotecas = Biblioteca.objects.all()
-        return render(request, 'usuarios/login.html', {'bibliotecas':bibliotecas})
-
-    # @staticmethod
-    # def post(request):
-    #     data = request.POST
-    #     username = data.get('biblioteca')
-    #     return JsonResponse({'biblioteca': username})
 
     template_name = 'usuarios/login.html'
-        
 
+    
+    def get(self, request, *args, **kwargs):
+        bibliotecas = Biblioteca.objects.all()
+        return render(self.request, 'usuarios/login.html', {'bibliotecas':bibliotecas})
 
+    
 
-        
 
 
 def _sign_up(name):

@@ -9,7 +9,7 @@ from .forms import BookCreationForm
 from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
-
+import json
 # Create your views here.
 class AdminBookList(AdminMixin,ListView):
     model = Libros
@@ -42,12 +42,23 @@ class DeleteBookView(DeleteView):
     success_url = reverse_lazy('book:admin_index')
 
 
-class UserBookList(UserMixin, ListView):
-    model = Libros
-    context_object_name = 'Libro'
-    template_name = 'libros/user_list.html'
-    # queryset = Libros.objects.filter(biblioteca_id=1)
-
+class UserBookList(UserMixin,View):
+    
+    @staticmethod
+    def get(request):
+        return render(request, 'libros/user_list.html')
+    
+    @staticmethod
+    def post(request):
+        data = request.POST
+        
+        nuevo = data.get('biblioteca_id')
+        print(nuevo)
+        libros = Libros.objects.filter(biblioteca_id = nuevo).values('id', "titulo", "autor__nombre", "tema__tema", "disponibles", "ubicacion", "fecha_registro")
+        libros = json.dumps(list(libros), cls=serializers.json.DjangoJSONEncoder)
+        
+        return JsonResponse({"Libro": libros})
+        
 
 class MostrarBibliotecas(ListView):
     model = Biblioteca
@@ -73,3 +84,10 @@ class CrearBiblioteca(View):
             )
 
         return JsonResponse({"data": data})
+
+# def ajaxlibros(request):
+#     data = request.POST
+#     nuevo = data.get('biblioteca_id')
+#     libros = Libros.objects.filter(biblioteca_id=nuevo)
+#     print(libros)
+#     return libros

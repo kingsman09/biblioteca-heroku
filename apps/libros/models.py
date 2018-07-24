@@ -25,6 +25,7 @@ class Biblioteca(models.Model):
         verbose_name_plural = 'Bibliotecas'
 
 
+
 # Create your models here.
 class Libros(models.Model):
     titulo = models.CharField(_('titulo'), max_length=150)

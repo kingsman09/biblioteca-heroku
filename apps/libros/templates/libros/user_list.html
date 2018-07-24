@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block navbar_items %} 
     <li class="nav-item active">
@@ -39,33 +39,18 @@
                         <th scope="col" > Operaciones </th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for libro in Libro %}
-                    <tr>
-                        <th scope="col"> {{ forloop.counter }} </th>
-                        <th> {{ libro.titulo }} </th>
-                        <th> {{ libro.autor }} </th>
-                        <th> {{ libro.tema }} </th>
-                        <th> {{ libro.ubicacion }} </th>
-                        <th> {{ libro.disponibles }} </th>
-                        
-                        {% if libro.disponibles > 0 %}
-                            <th> <a href="{% url 'prestamos:pre-prestamo' libro.id %}" class="btn btn-info"> Prestar </a> </th>
-                        {% else %}
-                            <th> No disponible </th>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
+                <tbody id="tbl_libros">
+                   
                 </tbody>
             </table>
-            <input type="hidden" id="biblioteca_id" name="biblio_id">
+            {% csrf_token %}
         </div>
     </div>
 
 
-    <script>
-        var id = localStorage.getItem('biblioteca_actual')
-        $('#biblioteca_id').val(id)
-        </script>
+    
+        
+    <script src="{% static 'js/login.js' %}"></script>
+
     
 {% endblock %}

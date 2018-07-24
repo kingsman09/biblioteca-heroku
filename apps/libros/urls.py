@@ -7,6 +7,7 @@ app_name = 'book'
 urlpatterns = [
     path('index-admin/', local_views.AdminBookList.as_view(), name='admin_index'),
     path('index-user/', local_views.UserBookList.as_view(), name='user_index'),
+    # path('ajaxlibros/', local_views.ajaxlibros, name='ajax_libros'),
 
     path('crear-libro/', local_views.CreateBookView.as_view(), name='crear-libro'),
     path('editar-libro<int:pk>/', local_views.UpdateBookView.as_view(), name='editar-libro'),

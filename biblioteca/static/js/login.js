@@ -1,27 +1,53 @@
-$('form').on('submit', function(evt){
-    // evt.preventDefault()
-    email = $('#id_email').val()
-    password = $('#id_password').val()
-    biblioteca = $('#slc_biblioteca').val()
+$(function(){
 
+    console.log('entra')
+    var id_biblioteca = localStorage.getItem('biblioteca_id')
+    console.log(id_biblioteca)
+
+    
     $.ajax({
-        url: '/login/',
+        url: '/libros/index-user/',
         type: 'post',
         dataType: 'json',
         data: {
-            email: email,
-            password: password,
-            biblioteca: biblioteca,
+            biblioteca_id: id_biblioteca,   
             csrfmiddlewaretoken: $('input:hidden[name=csrfmiddlewaretoken]').val(), 
         },
         success: function(response){
-            console.log(biblioteca)
-            localStorage.setItem('biblioteca_id', biblioteca)
+            console.log('jajsjs')
+            var libros = $.parseJSON(response.Libro)
+            console.log(libros)
+            var tabla = ''
+            libros.forEach((libro, index) => {
+                tabla += '<tr>';
+                tabla += '<td>' + (index + 1)  + '</td>' +
+                         '<td>' + libros[index]['titulo'] + '</td>' +
+                         '<td>' + libros[index]['autor__nombre'] +  '</td>' + 
+                         '<td>' + libros[index]['tema__tema'] + '</td>' + 
+                         '<td>' + libros[index]['ubicacion'] + '</td>' + 
+                         '<td>' + libros[index]['disponibles'] + '</td>'
+
+                         if(libros[index]['disponibles'] > 0 ){
+                            tabla += '<td> <a href="/prestamos/pre-prestamo/'+ libros[index]['id']+'"  class="btn btn-info"> Prestar </a> </td>' + 
+                            '</tr>';
+
+                         } 
+                         else {
+                            tabla += `<td>  No disponible </td> </tr>`;
+
+                         }
+
+
+            });
+            $('#tbl_libros').html(tabla)
+            
             
         }, 
         error: function(error){
+            console.log('error')
             console.log(error)
         }
     })
 
 })
+
