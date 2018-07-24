@@ -3,21 +3,24 @@
 {% block title %} Mis prestamos {% endblock %}
 
 {% block navbar_items %}
-<li class="nav-item ">
-        <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
-    </li>
-    <li class="nav-item active">
-        <a href="{% url 'prestamos:prestamo-admin' %}" class="nav-link"> Prestamos </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'usuarios:list-users' %}" > Usuarios </a> 
-    </li>
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'autor:autores-admin' %}"> Autor </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'prestamos:prestamo-admin' %}" class="nav-link"> Prestamos </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'book:bibliotecas' %}" class="nav-link"> Prestamos </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'usuarios:list-users' %}" > Usuarios </a> 
+</li>
 
 {% endblock %}
 

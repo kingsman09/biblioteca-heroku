@@ -85,9 +85,3 @@ class CrearBiblioteca(View):
 
         return JsonResponse({"data": data})
 
-# def ajaxlibros(request):
-#     data = request.POST
-#     nuevo = data.get('biblioteca_id')
-#     libros = Libros.objects.filter(biblioteca_id=nuevo)
-#     print(libros)
-#     return libros
