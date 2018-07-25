@@ -14,11 +14,14 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'temas:temas-admin' %}"> Tema </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item ">
         <a href="{% url 'prestamos:prestamo-admin' %}" class="nav-link"> Prestamos </a>
     </li>
+    <li class="nav-item ">
+        <a href="{% url 'book:bibliotecas' %}" class="nav-link"> Bibliotecas </a>
+    </li>
     <li class="nav-item active">
-        <a href="{% url 'usuarios:list-users' %}" class="nav-link"> Usuarios </a>
+        <a class="nav-link" href="{% url 'usuarios:list-users' %}" > Usuarios </a> 
     </li>
 
 {% endblock navbar_items %}

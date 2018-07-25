@@ -4,7 +4,7 @@
 
 {% block navbar_items %}
 
-    <li class="nav-item active">
+    <li class="nav-item ">
         <a class="nav-link" href="{% url 'book:admin_index' %}"> Libros <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
@@ -16,8 +16,8 @@
     <li class="nav-item">
         <a href="{% url 'prestamos:prestamo-admin' %}" class="nav-link"> Prestamos </a>
     </li>
-    <li class="nav-item">
-        <a href="{% url 'book:bibliotecas' %}" class="nav-link"> Prestamos </a>
+    <li class="nav-item active">
+        <a href="{% url 'book:bibliotecas' %}" class="nav-link"> Bibliotecas </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{% url 'usuarios:list-users' %}" > Usuarios </a> 
