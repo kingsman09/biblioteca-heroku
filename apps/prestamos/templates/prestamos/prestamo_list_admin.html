@@ -38,6 +38,7 @@
                 <th scope="col"> Libro </th>
                 <th scope="col"> Autor </th>
                 <th scope="col"> Tema </th>
+                <th scope="col"> Usuario </th>
                 <th scope="col"> Prestamo </th>
                 <th scope="col"> Devolucion </th>
                 <th scope="col">  Estado</th>
@@ -53,6 +54,7 @@
                         <th> {{ prestamo.libro.titulo }} </th>
                         <th> {{ prestamo.libro.autor }} </th>
                         <th> {{ prestamo.libro.tema }} </th>
+                        <th> {{ prestamo.usuario.first_name }}  {{prestamo.usuario.last_name}} </th>
                         <th> {{ prestamo.fecha_prestamo|date:"d M Y" }} </th>
                         <th> {{ prestamo.fecha_devolucion|date:"d M Y" }} </th>
                         {% if prestamo.estado == 1 %}

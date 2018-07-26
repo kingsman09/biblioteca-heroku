@@ -26,24 +26,26 @@
 {% block content %}
 
     <div class="container mt-3">
-        <div class="table-responsive-md">
-            <table class="table table-hover table-sm text-center" id="table-controller">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col" > #  </th>
-                        <th scope="col" > Libro </th>
-                        <th scope="col" > Autor </th>
-                        <th scope="col" > Tema </th>
-                        <th scope="col" > Ubicacion </th>
-                        <th scope="col" > Disponibles </th>
-                        <th scope="col" > Operaciones </th>
-                    </tr>
-                </thead>
-                <tbody id="tbl_libros">
-                   
-                </tbody>
-            </table>
-            {% csrf_token %}
+
+        
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-row">
+                <div class="form-group">
+                <select id="slc_biblioteca" class="form-control col-md-11">
+                    {% for biblioteca in Biblioteca %}
+                        <option value="{{biblioteca.id}}"> {{ biblioteca.nombre }} </option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Cambiar" id="enviar">
+                </div>
+            </form>
+        </div>
+        <div class="table-responsive-md" id="insertar_tabla">
+            
         </div>
     </div>
 

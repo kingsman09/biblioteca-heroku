@@ -16,14 +16,7 @@
     <form method="POST" class="px-5 py-3">
         <div class="form-group mx-auto">
         {% csrf_token %}
-        <p><label for="id_username">Email:</label> <input type="text" name="username" autofocus maxlength="254" required id="id_username" /></p>
-        <p><label for="id_password">Password:</label> <input type="password" name="password" required id="id_password" /></p> 
-        <select class="form-control col-md-4 mb-2" id="slc_biblioteca" name="slc_biblioteca"> 
-            {% for biblioteca in bibliotecas %}
-
-            <option value="{{ biblioteca.id }}"> {{ biblioteca.nombre }} </option>
-            {% endfor %}
-        </select>
+        {{form.as_p}} 
         <button type="submit" class="btn btn-success" > Login </button>
         </div>  
     </form>

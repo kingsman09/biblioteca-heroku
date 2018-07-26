@@ -38,7 +38,8 @@ class UserBookList(UserMixin,View):
     
     @staticmethod
     def get(request):
-        return render(request, 'libros/user_list.html')
+        biblioteca = Biblioteca.objects.all()
+        return render(request, 'libros/user_list.html', {'Biblioteca': biblioteca})
     
     @staticmethod
     def post(request):
@@ -49,7 +50,7 @@ class UserBookList(UserMixin,View):
         libros = Libros.objects.filter(biblioteca_id = nuevo).values('id', "titulo", "autor__nombre", "tema__tema", "disponibles", "ubicacion", "fecha_registro")
         libros = json.dumps(list(libros), cls=serializers.json.DjangoJSONEncoder)
         
-        return JsonResponse({"Libro": libros})
+        return JsonResponse({"Libro": libros, })
         
 
 class MostrarBibliotecas(ListView):

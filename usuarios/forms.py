@@ -7,7 +7,6 @@ class UserCreationForm(auth_forms.UserCreationForm):
         model = get_user_model()
         fields = [
             'email',
-            'username',
             'first_name',
             'last_name',
             'password1',
@@ -40,7 +39,6 @@ class DetailForm(forms.ModelForm):
         model = get_user_model()
         fields = [
             'email',
-            'username',
             'first_name',
             'last_name',
             'celphone',

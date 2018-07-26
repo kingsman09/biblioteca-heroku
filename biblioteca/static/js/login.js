@@ -1,6 +1,10 @@
-$(function(){
 
-    console.log('entra')
+
+function renderizar_tabla(){
+    var guardar_biblioteca = document.getElementById('slc_biblioteca').value
+    localStorage.setItem('biblioteca_id', guardar_biblioteca)
+
+
     var id_biblioteca = localStorage.getItem('biblioteca_id')
     console.log(id_biblioteca)
 
@@ -17,28 +21,50 @@ $(function(){
             console.log('jajsjs')
             var libros = $.parseJSON(response.Libro)
             console.log(libros)
-            var tabla = ''
+            var tabla = '';
+            tabla += `<table class='table table-hover table-sm text-center' id='table-controller'>
+                            <thead class='thead-dark'>
+                                <tr>
+                                    <th scope="col" > #  </th>
+                                    <th scope="col" > Libro </th>
+                                    <th scope="col" > Autor </th>
+                                    <th scope="col" > Tema </th>
+                                    <th scope="col" > Ubicacion </th>
+                                    <th scope="col" > Disponibles </th>
+                                    <th scope="col" > Operaciones </th>
+                                </tr>
+                            </thead>
+                            <tbody>`
+
             libros.forEach((libro, index) => {
-                tabla += '<tr>';
-                tabla += '<td>' + (index + 1)  + '</td>' +
-                         '<td>' + libros[index]['titulo'] + '</td>' +
-                         '<td>' + libros[index]['autor__nombre'] +  '</td>' + 
-                         '<td>' + libros[index]['tema__tema'] + '</td>' + 
-                         '<td>' + libros[index]['ubicacion'] + '</td>' + 
-                         '<td>' + libros[index]['disponibles'] + '</td>'
+                tabla += `<tr role='row' class='odd'>
+                            <td class='sorting_1'> ${index + 1}  </td>
+                            <td> ${libro.titulo} </td>
+                            <td> ${libro.autor__nombre}  </td> 
+                            <td> ${libro.tema__tema} </td> 
+                            <td> ${libro.ubicacion} </td> 
+                            <td> ${libro.disponibles} </td>`
 
-                         if(libros[index]['disponibles'] > 0 ){
-                            tabla += '<td> <a href="/prestamos/pre-prestamo/'+ libros[index]['id']+'"  class="btn btn-info"> Prestar </a> </td>' + 
-                            '</tr>';
-
-                         }else {
+                        if(libro.disponibles > 0 ){
+                            tabla += `<td> <a href="/prestamos/pre-prestamo/${libro.id}"  class="btn btn-info"> Prestar </a> </td>                             
+                                      </tr>`
+                        }else {
                             tabla += `<td>  No disponible </td> </tr>`;
 
-                         }
+                        }
 
 
             });
-            $('#tbl_libros').html(tabla)
+
+            tabla += `</tbody>
+                      </table>`
+
+            $('#insertar_tabla').html(tabla)
+            $('#table-controller').DataTable();
+            $("#table-controller_paginate").hide();
+            $("#table-controller_length").hide();
+            $("#table-controller_info").hide();
+       
             
             
         }, 
@@ -47,6 +73,18 @@ $(function(){
             console.log(error)
         }
     })
+}
 
+$(function(){
+    renderizar_tabla()
 })
+
+$('#enviar').on('click', function(evt){
+    evt.preventDefault()
+    renderizar_tabla()
+})
+
+
+
+
 

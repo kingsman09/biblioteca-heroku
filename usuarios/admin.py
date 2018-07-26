@@ -8,8 +8,8 @@ from django.utils.translation import gettext_lazy as _
 @admin.register(get_user_model())
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
-         (None, {'fields': ('username', 'password', 'email')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'cui', 'birth_date', 'gender', 'celphone', 
+         (None, {'fields': ( 'first_name', 'last_name', 'password', 'email')}),
+        (_('Personal info'), {'fields': ('cui', 'birth_date', 'gender', 'celphone', 
                                          'adress',  'departamento', 'municipio','escolaridad', 'establecimiento','zona','imagen', 'estado')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),

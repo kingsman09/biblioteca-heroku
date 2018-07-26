@@ -3,6 +3,10 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from .forms import UserCreationForm, DetailForm
 from django.views.generic import CreateView, View, ListView, DetailView
+
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
+
 from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
@@ -35,24 +39,16 @@ class IndexView(LoginRequiredMixin, View):
 
 
 class SignInView(LoginView):
-
     template_name = 'usuarios/login.html'
-
-    
-    def get(self, request, *args, **kwargs):
-        bibliotecas = Biblioteca.objects.all()
-        return render(self.request, 'usuarios/login.html', {'bibliotecas':bibliotecas})
-
-    
-
-
+    success_url = reverse_lazy('usuarios:index')
 
 def _sign_up(name):
-    class SignUpView(CreateView):
+    class SignUpView(SuccessMessageMixin, CreateView):
         model = get_user_model()
         form_class = UserCreationForm
         success_url = reverse_lazy('usuarios:login')
         template_name = 'usuarios/create_user.html'
+        success_message = 'Usuario creado exitosamente'
 
         def form_valid(self, form:UserCreationForm):
             if form.is_valid:
