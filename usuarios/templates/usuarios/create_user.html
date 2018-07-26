@@ -19,8 +19,17 @@
     document.getElementById('id_imagen').setAttribute('accept', 'image/*')
     var error = $('.errorlist').css({'color': 'red', 'font-size': '25px'})
 
-    var birht_date = '';
-    
+    var contador = document.querySelectorAll('p')
+    console.log(contador)
+
+    contador.forEach((element, index)=>{
+        if (index == 12){
+            element.setAttribute('id', 'fecha')
+        }
+    })
+    // var datepicker = `<p><input type='text' id='nacimiento' required class='form-control'></p>`
+    // $('#id_birth_date').append(datepicker)
+
 </script>
 <style>
     .nav-link{
