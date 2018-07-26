@@ -25,9 +25,9 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="table-responsive">
-        <table class="table table-hover mt-4" id="table-controller">
+        <table class="table table-hover mt-4 table-sm" id="table-controller">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col"> # </th>
@@ -39,7 +39,7 @@
             <tbody>
                 {% for tema in Temas %}
                     <tr>
-                        <th scope="row">{{ tema.id }}</th>
+                        <th scope="row">{{ forloop.counter }}</th>
                         <th> {{ tema.tema }}</th>
                         <th> {{ tema.fecha_ingreso }} </th>
                         <th> <a href="{% url 'temas:libro-tema' tema.id %}" class="btn btn-warning" >Ver  </a></th>

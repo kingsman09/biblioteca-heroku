@@ -59,5 +59,5 @@ class DetailForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fields in self.fields:
-            self.fields[fields].widget.attrs.update({'class': 'form-control col-md-11'})
+            self.fields[fields].widget.attrs.update({'class': 'form-control'})
 

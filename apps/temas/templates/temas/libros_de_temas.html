@@ -28,7 +28,7 @@
 
     <div class="container mt-3">
         <div class="table-responsive">
-        <table class="table table-hover" id="table-controller">
+        <table class="table table-hover table-sm" id="table-controller">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col" > #  </th>
@@ -50,12 +50,21 @@
                         <th> {{ book.ubicacion }} </th>
                         
                         <th> {{ book.disponibles }} </th>
+                        {% if book.disponibles > 0 %}
                         <th> <a href="{% url 'prestamos:pre-prestamo' book.id %}" class="btn btn-info"> Prestar </a> </th>
-                    </tr>
+                        </tr>
+                        {% else %}
+                        <th> No disponible </th>
+                        </tr>
+                        {% endif %}
                 {% endfor %}
             </tbody>
         </table>
+        
     </div>
+    <center>
+        <a href="{% url 'temas:temas-user' %}" class="btn btn-primary"> Regresar </a>
+    </center>
     </div>
 
 {% endblock %}

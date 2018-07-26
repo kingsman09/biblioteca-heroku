@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Libros del autor  {% endblock %}
 
@@ -33,7 +34,7 @@
 
     <div class="container mt-3">
         <div class="table-responsive">    
-            <table class="table table-hover" id="table-controller">
+            <table class="table table-hover table-sm" id="table-controller">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" > #  </th>
@@ -45,28 +46,19 @@
                         <th scope="col" > Operaciones </th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for book in Book %}
-                        <tr>
-                            <th scope="col"> {{ forloop.counter }} </th>
-                            <th> {{ book.titulo }} </th>
-                            <th> {{ book.autor }} </th>
-                            <th> {{ book.tema }} </th>
-                            <th> {{ book.ubicacion }} </th>
-                            
-                            <th> {{ book.disponibles }} </th>
-                            {% if book.disponibles > 0 %}
-                                <th> <a href="{% url 'prestamos:pre-prestamo' book.id %}" class="btn btn-info"> Prestar </a> </th>
-                            {% else %}
-                                <th> No disponible </th>
-                            {% endif %}
-                        </tr>
-                    {% endfor %}
+                <tbody id="tbl_libros_autor">
+                    
                 </tbody>
             </table>
+            {% csrf_token %}
+            <input type="hidden" id="id_autor" value={{autor_id}}>
+           
         </div>
-
+        <center>
+            <a href="{% url 'autor:autores-user' %}" class="btn btn-primary"> Regresar </a>
+        </center>
         
     </div>
 
+    <script src="{% static 'js/libros_autor.js' %}"></script>
 {% endblock %}

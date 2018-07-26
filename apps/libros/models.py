@@ -4,6 +4,7 @@ from apps.autores.models import Author
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from .validators import limit
+from datetime import datetime, timedelta
 
 
 
@@ -34,7 +35,7 @@ class Libros(models.Model):
     tema = models.ForeignKey(Temas, on_delete=models.PROTECT)
     ubicacion = models.CharField(_('ubicacion'), max_length=200)
     disponibles = models.PositiveIntegerField(_('libros disponibles'), validators=[limit], default=1, )
-    fecha_registro = models.DateField(_('Fecha de ingreso'), default=now())
+    fecha_registro = models.DateField(_('Fecha de ingreso'), default=datetime.now())
 
     class Meta: 
         ordering = ['id']

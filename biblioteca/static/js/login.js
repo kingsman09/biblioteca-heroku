@@ -31,8 +31,7 @@ $(function(){
                             tabla += '<td> <a href="/prestamos/pre-prestamo/'+ libros[index]['id']+'"  class="btn btn-info"> Prestar </a> </td>' + 
                             '</tr>';
 
-                         } 
-                         else {
+                         }else {
                             tabla += `<td>  No disponible </td> </tr>`;
 
                          }

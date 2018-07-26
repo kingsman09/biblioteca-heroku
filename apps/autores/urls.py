@@ -13,5 +13,5 @@ urlpatterns = [
 
     path('autores-user/', views.AuthorUserView.as_view(), name='autores-user'), 
 
-    path('prueba<int:pk>/', views.books, name='prueba')
+    path('prueba<int:pk>/', views.Book.as_view(), name='prueba')
 ]

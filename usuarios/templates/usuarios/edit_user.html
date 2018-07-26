@@ -24,33 +24,27 @@
 
 {% block content %}
 
-<div class="mt-5 float-right" style="width: 30%">
-        <div class="card text-center" style="width: 18rem; ">
-            <img class="card-img-top" alt="Card image cap" id='perfil_imagen'>
-                <div class="card-body">
-                <h5 class="card-title">Foto de perfil</h5>
-            </div>
-        </div>
-    </div>
 
-    <div>
+
+    <div class="container mt-5">
         <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="mt-5 ml-5" style="width: 70%">
-        {{ form.as_p }}
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <img alt="Responsive image" class="img-thumbnail mb-4" id="perfil_imagen">
+                </div>
 
-            <div class="container" >
+                <div class="col-md-9">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+            </div>
+            <div class="container">
                 <button type="submit" class="btn btn-primary col-md-5"> Change </button>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                 <a href="{% url 'book:user_index' %}" class="btn btn-danger col-md-5"> Cancel </a>
             </div> 
-
-        </div>
-        
-        </form> 
-
-                 
-                  
+        </form>        
     </div>
 
     <script>

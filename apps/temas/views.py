@@ -34,6 +34,7 @@ class ThemeUserView(UserMixin, ListView):
     model = Temas
     context_object_name = 'Temas'
     template_name_suffix = '_list_user'
+    paginate_by = 5
 
 
 def libro_tema(request, pk):
