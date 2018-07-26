@@ -17,14 +17,6 @@ class AdminBookList(AdminMixin,ListView):
     paginate_by = 5
     
     template_name_suffix = '_list_admin'
-
-
-    # def post(self, request):
-    #     biblioteca = request.POST.get('biblio_id')
-    #     return biblioteca
-    
-    # biblioteca1 = post
-
   
 
 def _update_or_create(view):

@@ -23,10 +23,20 @@
 
 
 {% block content %}
+
+<div class="mt-5 float-right" style="width: 30%">
+        <div class="card text-center" style="width: 18rem; ">
+            <img class="card-img-top" alt="Card image cap" id='perfil_imagen'>
+                <div class="card-body">
+                <h5 class="card-title">Foto de perfil</h5>
+            </div>
+        </div>
+    </div>
+
     <div>
         <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group col-md-10 mx-auto">
+        <div class="mt-5 ml-5" style="width: 70%">
         {{ form.as_p }}
 
             <div class="container" >
@@ -45,6 +55,22 @@
 
     <script>
          document.getElementById('id_imagen').setAttribute('accept', 'image/*')
+
+        var atributo = document.querySelectorAll('a')
+        // atributo.setAttribute('id', 'nombre')
+        console.log(atributo)
+        atributo.forEach((elemento, index) => {
+            if (index == 7 ){
+                elemento.setAttribute('id', 'nombre')
+            }
+        })
+        
+        var href = document.getElementById('nombre')
+        var nuevo = href.getAttribute('href')
+        console.log(nuevo)
+        document.getElementById('perfil_imagen').setAttribute('src', nuevo)
+
+         
     </script>
 
 

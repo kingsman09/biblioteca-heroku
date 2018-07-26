@@ -27,8 +27,17 @@
 
 
 {% block content %}
-    <div class="content container">
-        
+
+<div class="mt-5 float-right" style="width: 30%">
+    <div class="card text-center" style="width: 18rem; ">
+        <img class="card-img-top" alt="Card image cap" id='perfil_imagen'>
+            <div class="card-body">
+            <h5 class="card-title">Foto de perfil</h5>
+        </div>
+    </div>
+</div>
+    <div class="mt-5 ml-5" style="width: 70%">
+    
         {% csrf_token %}
         {{ form.as_p }}
         <a href="{% url 'usuarios:list-users' %}" class="btn btn-info"> Atras </a>
@@ -38,6 +47,25 @@
         $('input').prop("disabled", true)
         $('#id_imagen').hide()
         $("select").prop("disabled", true)
+
+        
+        
+        var atributo = document.querySelectorAll('a')
+        // atributo.setAttribute('id', 'nombre')
+        atributo.forEach((elemento, index) => {
+            if (index == 8 ){
+                elemento.setAttribute('id', 'nombre')
+            }
+        })
+        
+        var href = document.getElementById('nombre')
+        var nuevo = href.getAttribute('href')
+        console.log(nuevo)
+        document.getElementById('perfil_imagen').setAttribute('src', nuevo)
+
+      
+        
+        
     </script>
 
 {% endblock %}
