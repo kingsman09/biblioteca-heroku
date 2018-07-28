@@ -46,9 +46,10 @@ def _sign_up(name):
     class SignUpView(SuccessMessageMixin, CreateView):
         model = get_user_model()
         form_class = UserCreationForm
-        success_url = reverse_lazy('usuarios:login')
+        success_url = reverse_lazy('usuarios:index')
         template_name = 'usuarios/create_user.html'
         success_message = 'Usuario creado exitosamente'
+
 
         def form_valid(self, form:UserCreationForm):
             if form.is_valid:

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 
 {% block title %} Crear Usuario {% endblock %}
@@ -13,24 +14,17 @@
             <button type="submit" class="btn btn-success"> Entrar</button>
         </form>
     </div>  
+    {% if messages %}
+        {% for message in messages %}
+            <h2> Usuario Creado </h2>
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }} </li>
+        {% endfor %}
+    {% endif %}
 </div>
 
-<script>
-    document.getElementById('id_imagen').setAttribute('accept', 'image/*')
-    var error = $('.errorlist').css({'color': 'red', 'font-size': '25px'})
 
-    var contador = document.querySelectorAll('p')
-    console.log(contador)
+<script src="{% static 'js/ajustes_usuario.js' %}"></script>
 
-    contador.forEach((element, index)=>{
-        if (index == 12){
-            element.setAttribute('id', 'fecha')
-        }
-    })
-    // var datepicker = `<p><input type='text' id='nacimiento' required class='form-control'></p>`
-    // $('#id_birth_date').append(datepicker)
-
-</script>
 <style>
     .nav-link{
         display: none;
