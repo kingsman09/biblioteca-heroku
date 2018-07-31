@@ -29,7 +29,7 @@
 
 
 <div class="container mt-3" style="height: 350px;">
-    <div class="table-respon">
+    <div class="table-responsive">
     <table class="table table-hover" id="table-controller">
         <thead class="thead-dark">
             <tr>
@@ -59,20 +59,25 @@
                         <th> {{ prestamo.fecha_devolucion|date:"d M Y" }} </th>
                         {% if prestamo.estado == 1 %}
                         <th style="color: blue;"> Prestado </th>
-                        <th> <a href="{% url 'prestamos:devolver' prestamo.id %}" class="btn btn-info"> Devolver </a> </th>
+                        <th> <a href="{% url 'prestamos:devolver' prestamo.id %}" class="btn btn-primary"> Devolver </a> </th>
+                        </tr>
                         {% endif %}
                         {% if prestamo.estado == 2 %}
                         <th style="color: red;"> Mora </th>
+                        <th> <a class="btn btn-warning" > Devolver </a> </th>
+                        </tr>
                         {% endif %}
                         {% if prestamo.estado == 3 %}
                         <th style="color: green;"> Devuelto </th>
+                        <th> <a class="btn btn-success disabled" style="color: white;"> Devuelto</a> </th>
+                        </tr>
                         {% endif %}
                         {% if prestamo.estado == 4 %}
                         <th > Devuelto con mora </th>
+                        <th> <a class="btn btn-info" > Devuelto </a> </th>
+                        </tr>
                         {% endif %}
                         
-                        
-                    </tr>   
                 {% endfor %}
             </tbody>
         </thead>
@@ -80,29 +85,29 @@
     </div>
 
     <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item"> <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span class="page-link">&laquo; </span> </li>
+            {% endif %}
 
-                    <li class="page-item"> <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">&laquo;</a></li>
+            {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="active page-item"><span class="page-link"> {{ i }} <span class="sr-only">current</span></span></li>
                 {% else %}
-                <li class="disabled"><span class="page-link">&laquo; </span> </li>
+                    <li class="page-item"><a href="?page={{ i }}" class="page-link"> {{ i }} </a></li>
                 {% endif %}
-                {% for i in paginator.page_range %}
-                    {% if page_obj.number == i %}
-                        <li class="active page-item"><span class="page-link"> {{ i }} <span class="sr-only">current</span></span></li>
-                    {% else %}
-                        <li class="page-item"><a href="?page={{ i }}" class="page-link"> {{ i }} </a></li>
-                    {% endif %}
-                {% endfor %}
-                {% if page_obj.has_next %}
-                    <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a></li>
-                {% else %}
-                    <li class="disabled" class="page-item"> <span class="page-link">&raquo;</span> </li>
-                {% endif %}
-            </ul>
-        </nav>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a></li>
+            {% else %}
+                <li class="disabled" class="page-item"> <span class="page-link">&raquo;</span> </li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
-
 
 
 

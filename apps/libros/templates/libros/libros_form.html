@@ -26,14 +26,23 @@
 
 {% block content %}
 
-    <div class="container">
+    <center>
+    <div class="container mt-3">
+        
         <form method="POST">
+            <div class="col-md-6">
             {% csrf_token %}
             {{ form.as_p }}
-
-            <button type="submit" class="btn btn-success"> Hecho </button>
-
+            
+        </div>
+        <div class="container">
+                <button type="submit" class="btn btn-success col-md-3"> Hecho </button>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="{% url 'book:admin_index' %}" class="btn btn-warning col-md-3"> Atras </a>
+            </div>
         </form>
+    </center>
+
     </div>
 
    

@@ -13,5 +13,11 @@ class BookCreationForm(forms.ModelForm):
             'ubicacion',
             'disponibles',
         )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fields in self.fields:
+            self.fields[fields].widget.attrs.update({
+            'class': 'form-control',
+            })
 
 

@@ -10,26 +10,22 @@
     <script src="{% static 'js/jquery.min.js' %}" ></script>
     <script src="{% static 'js/index.js' %}"></script>
     
-
-    <!--  datatables cdn  -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
-   
-
-
+    
     <!-- links de iconos  -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <!-- datepicker links  -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="{% static 'js/jquery/css/jquery-ui.css' %}">
+    <script src="{% static 'js/jquery/jquery-ui.js' %}"></script>
 
 
     <!--  Bootstrap links -->
     <link rel="stylesheet" href="{% static 'js/bootstrap/bootstrap.min.css' %}" >
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+     <!--  datatables bootstrap links  -->
+     <link rel="stylesheet" type="text/css" href="{% static 'js/bootstrap/datatables.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/bootstrap/datatables.min.js' %}"></script>
 
     <title>{% block title %}  {% endblock title %}</title>
 </head>

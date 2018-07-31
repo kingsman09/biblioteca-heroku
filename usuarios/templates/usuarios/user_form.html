@@ -28,20 +28,23 @@
 
 {% block content %}
 
-<div class="mt-5 float-right" style="width: 30%">
-    <div class="card text-center" style="width: 18rem; ">
-        <img class="card-img-top" alt="Card image cap" id='perfil_imagen'>
-            <div class="card-body">
-            <h5 class="card-title">Foto de perfil</h5>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <label style="font-size: 25px;"> Foto de perfil</label>
+                <img alt="Responsive image" class="img-thumbnail mb-4" id="perfil_imagen">
+            </div>
+            <div class="col-md-9">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <center>
+            <a href="{% url 'usuarios:list-users' %}" class="btn btn-info col-md-6"> Atras </a>
+            </center>
+            </div>
         </div>
     </div>
-</div>
-    <div class="mt-5 ml-5" style="width: 70%">
-    
-        {% csrf_token %}
-        {{ form.as_p }}
-        <a href="{% url 'usuarios:list-users' %}" class="btn btn-info"> Atras </a>
-    </div>
+
 
     <script>
         $('input').prop("disabled", true)
