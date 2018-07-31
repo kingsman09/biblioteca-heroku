@@ -9,10 +9,12 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(models.Pais)
 class PersonAdmin(ImportExportModelAdmin):
+    ordering = ('id',)
     pass
 
 @admin.register(models.Departamento)
 class DepartamentoAdmin(ImportExportModelAdmin):
+    ordering = ('id',)
     pass
 
 @admin.register(models.Municipio)
