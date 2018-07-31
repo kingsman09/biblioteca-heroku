@@ -47,10 +47,10 @@ class UserBookList(UserMixin,View):
         
         nuevo = data.get('biblioteca_id')
         print(nuevo)
-        libros = Libros.objects.filter(biblioteca_id = nuevo).values('id', "titulo", "autor__nombre", "tema__tema", "disponibles", "ubicacion", "fecha_registro")
+        libros = Libros.objects.filter(biblioteca__id = nuevo).values('id', "titulo", "autor__nombre", "tema__tema", "disponibles", "ubicacion", "fecha_registro")
         libros = json.dumps(list(libros), cls=serializers.json.DjangoJSONEncoder)
         
-        return JsonResponse({"Libro": libros, })
+        return JsonResponse({"Libro": libros})
         
 
 class MostrarBibliotecas(ListView):

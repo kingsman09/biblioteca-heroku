@@ -1,4 +1,13 @@
 
+$(function(){
+    renderizar_tabla()
+})
+
+$('#enviar').on('click', function(evt){
+    evt.preventDefault()
+    renderizar_tabla()
+})
+
 
 function renderizar_tabla(){
     var guardar_biblioteca = document.getElementById('slc_biblioteca').value
@@ -75,14 +84,6 @@ function renderizar_tabla(){
     })
 }
 
-$(function(){
-    renderizar_tabla()
-})
-
-$('#enviar').on('click', function(evt){
-    evt.preventDefault()
-    renderizar_tabla()
-})
 
 
 
