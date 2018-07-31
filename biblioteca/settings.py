@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     'apps.temas',
     'apps.autores',
     'apps.prestamos',
+
+    'import_export',
 ]
+
+IMPORT_EXPORT_TRANSACTIONS = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

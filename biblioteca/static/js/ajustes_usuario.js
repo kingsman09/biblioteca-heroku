@@ -2,9 +2,10 @@ document.getElementById('id_imagen').setAttribute('accept', 'image/*')
 var error = $('.errorlist').css({'color': 'red', 'font-size': '25px'})
 
 var contador = document.querySelectorAll('p')
-console.log(contador)
 
 document.getElementById('id_birth_date').setAttribute('hidden', '')
+
+
 
 contador.forEach((element, index)=>{
     if (index == 13){
@@ -12,25 +13,15 @@ contador.forEach((element, index)=>{
     }
 })
 
-var datepicker = `
-                    <label for='id_birth_date'> Birth Date </label>
-                    <input type='text' name='birth_date' id='id_birth_date' required class='form-control'>
-                 `
+
+var datepicker = `<label for='id_birth_date'> Birth Date </label>
+                  <input type='text' name='birth_date' id='id_birthdate' required class='form-control'>`
+
+
 $('#fecha').html(datepicker)
-$('#id_birth_date').datepicker()
+$('#id_birthdate').datepicker()
 
-
-
-
-$('form').on('submit', function(){
-    var errores = document.querySelectorAll('.errorlist')
-    localStorage.setItem('errores', errores.length)
-    if( errores.length < 1 ){
-        alert('Creado exitosamente')
-    }
-})
-
-document.getElementById('id_birth_date').setAttribute('placeholder', 'Press here')
+document.getElementById('id_birthdate').setAttribute('placeholder', 'Press here')
 
 $.datepicker.regional['es'] = {
                 closeText: 'Cerrar',
