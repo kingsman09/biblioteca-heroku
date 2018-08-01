@@ -14,6 +14,7 @@ class Prestamo(models.Model):
     libro = models.ForeignKey(Libros, on_delete=models.PROTECT)
     fecha_prestamo = models.DateField(_('fecha de prestamos'), default=datetime.now())
     fecha_devolucion = models.DateField(_('fecha de devolucion'), default=(datetime.now() + timedelta(days=8)))
+    fecha_prestamo = models.DateTimeField
     token = models.CharField(max_length=50, default=get_random_string(length=15, allowed_chars='ABCDEFGHKMNPQRSTUVWXYZ123456789'), unique=True) 
     estado = models.PositiveSmallIntegerField(default=1)
 
@@ -22,3 +23,11 @@ class Prestamo(models.Model):
 
     def is_deadline(self):
         return now().date() > self.fecha_devolucion
+
+    @property
+    def deadline(self):
+        hoy = datetime.now()
+        diff = self.fecha_devolucion - hoy
+        print(diff.days)
+        return diff.days
+        

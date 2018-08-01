@@ -11,7 +11,11 @@ from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 import json
 # Create your views here.
+
+
+
 class AdminBookList(AdminMixin,ListView):
+    
     model = Libros
     context_object_name = 'Libro'
     paginate_by = 5
@@ -32,6 +36,7 @@ UpdateBookView = _update_or_create(UpdateView)
 class DeleteBookView(DeleteView):
     model = Libros
     success_url = reverse_lazy('book:admin_index')
+
 
 
 class UserBookList(UserMixin,View):
