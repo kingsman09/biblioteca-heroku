@@ -19,11 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('usuarios.urls')),
     path('libros/', include('apps.libros.urls')),
     path('temas/', include('apps.temas.urls')),
     path('autores/',include('apps.autores.urls')),
-    path('prestamos/', include('apps.prestamos.urls'))
+    path('prestamos/', include('apps.prestamos.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

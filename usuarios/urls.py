@@ -12,5 +12,7 @@ urlpatterns = [
     path('user-list/', views.UserListView.as_view(), name='list-users'),
     path('user-detail<int:pk>/', views.UserDetailView.as_view(), name='user-detail'),
 
+    path('departamento/', views.GetMuni.as_view(), name='departamento'),
+
     path('user-edit<int:pk>/', views.UserUpdateView.as_view(), name='user-edit'),
 ]

@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+import json
+from django.core import serializers
+
 from .forms import UserCreationForm, DetailForm
 from django.views.generic import CreateView, View, ListView, DetailView
 
@@ -16,6 +19,7 @@ from django.contrib.auth.models import Group
 from .mixins import AdminMixin, UserMixin
 from .models import User
 from apps.libros.models import Biblioteca
+from models.paises.models import Municipio
 
 
 # Create your views here.
@@ -50,8 +54,6 @@ def _sign_up(name):
         success_url = reverse_lazy('usuarios:index')
         template_name = 'usuarios/create_user.html'
         
-
-
         def form_valid(self, form:UserCreationForm):
             if form.is_valid:
                 user = form.save()
@@ -65,13 +67,26 @@ def _sign_up(name):
 
                 messages.success(self.request, 'Usuario creado exitosamente')
             return redirect(self.success_url)
-
     return SignUpView.as_view()
 
 SignUpAdmin = _sign_up('admin')
 SignUpUser = _sign_up('user')
         
 
+class GetMuni(View):
+    @staticmethod
+    def get(request):
+        data = request.GET
+
+        id_departamento = data.get('id_departamento')
+
+        print(id_departamento)
+        departamento = Municipio.objects.filter(departamento__id = id_departamento).values('id','name')
+        departamento = json.dumps(list(departamento), cls=serializers.json.DjangoJSONEncoder)
+        return JsonResponse({'dato': departamento})
+
+
+    
 class SignOutView(LoginRequiredMixin, LogoutView):
     pass
 

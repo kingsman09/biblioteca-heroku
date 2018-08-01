@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %} Editar Perfil {% endblock %}
 
@@ -37,6 +38,8 @@
                 <div class="col-md-9">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <input type="hidden" id="user_municipio" value='{{ request.user.municipio }}'>
+                    <input type="hidden" id="nacimiento" value='{{ request.user.birth_date }}'
                 </div>
             </div>
             
@@ -48,25 +51,6 @@
         </form>        
     </div>
 
-    <script>
-         document.getElementById('id_imagen').setAttribute('accept', 'image/*')
-
-        var atributo = document.querySelectorAll('a')
-        // atributo.setAttribute('id', 'nombre')
-        console.log(atributo)
-        atributo.forEach((elemento, index) => {
-            if (index == 7 ){
-                elemento.setAttribute('id', 'nombre')
-            }
-        })
-        
-        var href = document.getElementById('nombre')
-        var nuevo = href.getAttribute('href')
-        console.log(nuevo)
-        document.getElementById('perfil_imagen').setAttribute('src', nuevo)
-
-         
-    </script>
-
+<script src="{% static 'js/editar_usuario.js' %}"></script>
 
 {% endblock %}

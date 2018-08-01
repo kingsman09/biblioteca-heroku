@@ -1,28 +1,32 @@
 document.getElementById('id_imagen').setAttribute('accept', 'image/*')
-var error = $('.errorlist').css({'color': 'red', 'font-size': '25px'})
+
+var atributo = document.querySelectorAll('a')
+// atributo.setAttribute('id', 'nombre')
+console.log(atributo)
+atributo.forEach((elemento, index) => {
+    if (index == 7 ){
+        elemento.setAttribute('id', 'nombre')
+    }
+})
+
+var href = document.getElementById('nombre')
+var nuevo = href.getAttribute('href')
+console.log(nuevo)
+document.getElementById('perfil_imagen').setAttribute('src', nuevo)
+
 
 var contador = document.querySelectorAll('p')
-document.getElementById('id_birth_date').setAttribute('hidden', '')
+console.log(contador)
+
 
 contador.forEach((element, index)=>{
-    if (index == 13){
-        element.setAttribute('id', 'fecha')
-    }
-    if (index == 11){
+    if (index == 7){
         element.setAttribute('id', 'insert_municipio')
     }
 })
 
-// creo un nuevo label y un input para sobreescribir el que viene por defecto
-var datepicker = `<label for='id_birth_date'> Birth Date </label>
-                  <input type='text' name='birth_date' id='id_birthdate' required class='form-control'>`
+$('#id_birth_date').datepicker()
 
-// inserto el input y el label en el html 
-$('#fecha').html(datepicker)
-// le agrego el datepicker al campo que acabo de crear con el id "id_birth_date"
-$('#id_birthdate').datepicker()
-
-document.getElementById('id_birthdate').setAttribute('placeholder', 'Press here')
 
 $.datepicker.regional['es'] = {
                 closeText: 'Cerrar',
@@ -43,13 +47,18 @@ $.datepicker.regional['es'] = {
                 isRTL: false,
                 showMonthAfterYear: false,
                 yearSuffix: ''};
-                $.datepicker.setDefaults($.datepicker.regional['es']);
-        
+$.datepicker.setDefaults($.datepicker.regional['es']);
 
+
+
+localStorage.setItem('muni_id', $('#user_municipio').val())
+
+
+var municipio_actual = localStorage.getItem('muni_id')
 // insertar select en blanco de municipios
 var municipio = `<label for='id_municipio'> Municipio </label>
                  <select id='id_municipio' name='municipio' class='form-control' required>
-                 <option value=0> --------- </option>`
+                 <option> ${municipio_actual}</option>`
 
 $('#insert_municipio').html(municipio)
 
@@ -82,5 +91,3 @@ $('#id_departamento').on('change', function(){
         }
     })
 })
-
-
