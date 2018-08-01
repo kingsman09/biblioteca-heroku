@@ -38,8 +38,6 @@
                 <div class="col-md-9">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input type="hidden" id="user_municipio" value='{{ request.user.municipio }}'>
-                    <input type="hidden" id="nacimiento" value='{{ request.user.birth_date }}'
                 </div>
             </div>
             
@@ -48,7 +46,9 @@
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                 <a href="{% url 'book:user_index' %}" class="btn btn-danger col-md-5"> Cancel </a>
             </div> 
-        </form>        
+        </form>    
+        <input type="hidden" id="user_municipio" value='{{ request.user.municipio }}'>   
+        <input type='hidden' id="municipio_id" value='{{ request.user.municipio.id }}'> 
     </div>
 
 <script src="{% static 'js/editar_usuario.js' %}"></script>

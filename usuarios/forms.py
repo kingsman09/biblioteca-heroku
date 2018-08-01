@@ -34,7 +34,9 @@ class UserCreationForm(auth_forms.UserCreationForm):
                 })
         self.fields['establecimiento'].widget.attrs.update({'required': False})
         self.fields['imagen'].widget.attrs.update({'required': False})
-        self.fields['cui'].widget.attrs.update({'max_length': 13})
+        self.fields['celphone'].widget.attrs.update({'onKeyPress': 'if(this.value.length==8) return false'})
+        self.fields['cui'].widget.attrs.update({'onKeyPress': 'if(this.value.length==13) return false'})
+        
         
 
 class DetailForm(forms.ModelForm):
@@ -61,4 +63,7 @@ class DetailForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for fields in self.fields:
             self.fields[fields].widget.attrs.update({'class': 'form-control'})
+
+        self.fields['celphone'].widget.attrs.update({'onKeyPress': 'if(this.value.length==8) return false'})
+        self.fields['cui'].widget.attrs.update({'onKeyPress': 'if(this.value.length==13) return false'})
 

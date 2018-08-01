@@ -23,7 +23,11 @@ contador.forEach((element, index)=>{
     if (index == 7){
         element.setAttribute('id', 'insert_municipio')
     }
+    if (index == 3){
+        element.setAttribute('id', 'celphone_user')
+    }
 })
+
 
 $('#id_birth_date').datepicker()
 
@@ -50,15 +54,20 @@ $.datepicker.regional['es'] = {
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
 
-
+// se guarda en el local storage el nombre del municipio del usuario
 localStorage.setItem('muni_id', $('#user_municipio').val())
+
+// se guarda en el local storage el id del municipio del usuario
+localStorage.setItem('id', $('#municipio_id').val())
 
 
 var municipio_actual = localStorage.getItem('muni_id')
+var id_municipio = localStorage.getItem('id')
+
 // insertar select en blanco de municipios
 var municipio = `<label for='id_municipio'> Municipio </label>
                  <select id='id_municipio' name='municipio' class='form-control' required>
-                 <option> ${municipio_actual}</option>`
+                 <option value=${id_municipio}> ${municipio_actual}</option>`
 
 $('#insert_municipio').html(municipio)
 
@@ -75,14 +84,12 @@ $('#id_departamento').on('change', function(){
         },
         success: function(response){
             var municipios = $.parseJSON(response.dato)
-
             var insertar = '';
 
             // se crean los municipios segun el departamento seleccionado
             municipios.forEach(municipio => {
                 insertar += `<option value=${municipio.id}> ${municipio.name} </option> `;
             })
-
             // se insertan los municipios creados en el template
             $('#id_municipio').html(insertar);
         },

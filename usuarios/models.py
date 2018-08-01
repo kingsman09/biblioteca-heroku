@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _ 
+from django.core.validators import MaxValueValidator
 
 from models.paises.models import Municipio
 from models.paises.models import Departamento
@@ -9,13 +10,13 @@ from models.paises.models import Departamento
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     adress = models.CharField(max_length=100 , null=True, blank=True)
-    celphone = models.PositiveIntegerField(blank=True, null=True)
+    celphone = models.PositiveIntegerField(blank=True, null=True, validators=[MaxValueValidator(99999999)])
     gender = models.BooleanField(default=True, choices = [
         (True, 'Male'),
         (False, 'Female'),
     ])
     birth_date = models.DateField(blank=True, null=True)
-    cui = models.PositiveIntegerField(blank=True, null=True)
+    cui = models.PositiveIntegerField(blank=True, null=True, validators=[MaxValueValidator(9999999999999)])
     departamento = models.ForeignKey(Departamento, on_delete=models.PROTECT,blank=True,  null=True)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, blank=True, null=True)
     zona = models.PositiveIntegerField(_('zona del municipio'), blank=True, null=True)

@@ -2,27 +2,17 @@ document.getElementById('id_imagen').setAttribute('accept', 'image/*')
 var error = $('.errorlist').css({'color': 'red', 'font-size': '25px'})
 
 var contador = document.querySelectorAll('p')
-document.getElementById('id_birth_date').setAttribute('hidden', '')
 
 contador.forEach((element, index)=>{
-    if (index == 13){
-        element.setAttribute('id', 'fecha')
-    }
     if (index == 11){
         element.setAttribute('id', 'insert_municipio')
     }
 })
 
-// creo un nuevo label y un input para sobreescribir el que viene por defecto
-var datepicker = `<label for='id_birth_date'> Birth Date </label>
-                  <input type='text' name='birth_date' id='id_birthdate' required class='form-control'>`
-
-// inserto el input y el label en el html 
-$('#fecha').html(datepicker)
 // le agrego el datepicker al campo que acabo de crear con el id "id_birth_date"
-$('#id_birthdate').datepicker()
+$('#id_birth_date').datepicker()
+document.getElementById('id_birth_date').setAttribute('placeholder', 'Press here for insert date')
 
-document.getElementById('id_birthdate').setAttribute('placeholder', 'Press here')
 
 $.datepicker.regional['es'] = {
                 closeText: 'Cerrar',
@@ -66,14 +56,12 @@ $('#id_departamento').on('change', function(){
         },
         success: function(response){
             var municipios = $.parseJSON(response.dato)
-
             var insertar = '';
 
             // se crean los municipios segun el departamento seleccionado
             municipios.forEach(municipio => {
                 insertar += `<option value=${municipio.id}> ${municipio.name} </option> `;
             })
-
             // se insertan los municipios creados en el template
             $('#id_municipio').html(insertar);
         },
