@@ -79,12 +79,16 @@ def devolver_libro(request, pk):
     prestamo = Prestamo.objects.get(pk=pk)
 
     prestamo.estado = 3
+    prestamo.save()
+    prestamo.usuario.estado = 1
+    prestamo.usuario.save()
+
     id_libro = prestamo.libro.id
     Libro = Libros.objects.get(id=id_libro)
     Libro.disponibles += 1
     Libro.save()
 
-    prestamo.save()
+    
     
     return redirect(reverse_lazy('book:user_index'))
     

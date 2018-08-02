@@ -10,17 +10,36 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 import json
+from usuarios.models import User
+
+from apps.prestamos.models import Prestamo 
 # Create your views here.
 
+def fecha_limite():
+    Prestamos = Prestamo.objects.all()
 
+    for prestamo in Prestamos:
+        if prestamo.deadline < 1:
+            prestamo.estado = 2
+            prestamo.usuario.estado = 2
+            prestamo.save()
+            prestamo.usuario.save()
+        else:
+            prestamo.estado = 1
+            prestamo.usuario.estado = 1
+            prestamo.save()
+            prestamo.usuario.save()
+            
+    
+    
 
 class AdminBookList(AdminMixin,ListView):
     
     model = Libros
     context_object_name = 'Libro'
     paginate_by = 5
-    
     template_name_suffix = '_list_admin'
+    fecha_limite()
   
 
 def _update_or_create(view):
@@ -40,6 +59,8 @@ class DeleteBookView(DeleteView):
 
 
 class UserBookList(UserMixin,View):
+    
+    fecha_limite()
     
     @staticmethod
     def get(request):
