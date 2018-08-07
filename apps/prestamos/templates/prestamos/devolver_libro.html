@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %} Devolver Libro {% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5 ">
+
+        {% if messages %}
+            {% for message in messages  %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong> {{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+
+    <label for="buscar_libro">Buscar Libro:</label>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row mb-5">
+            <div class="col-md-3">
+                <input type="text" name="codigo" id="buscar_libro" class="form-control" placeholder="Ingresa el token">
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-primary" value="Verificar"> 
+            </div>         
+        </div> 
+    </form>   
+
+    <table class="table table-hover text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"> Clasificacion</th>
+                <th scope="col"> Libro </th>
+            </tr>
+            <tbody>
+                <tr class="justify-content-center">
+                    <th> Libro </th>
+                    <th> {{ prestamo.libro.titulo }} </th>
+                    
+                </tr>
+                <tr>
+                    <th> Autor </th>
+                    <th> {{ prestamo.libro.autor }} </th>
+
+                </tr>
+                <tr>
+                    <th> Tema </th>
+                    <th> {{ prestamo.libro.tema }} </th>
+
+                </tr>
+                <tr>
+                    <th> Ubicacion </th>
+                    <th> {{ prestamo.libro.ubicacion }} </th>
+
+                </tr>
+                <tr>
+                    <th> Disponibles </th>
+                    <th> {{ prestamo.libro.disponibles }} </th>
+
+                </tr>
+                <tr>
+                    <th> Fecha de prestamo </th>
+                    <th> {{ prestamo.fecha_prestamo.day }} / {{ prestamo.fecha_prestamo.month}} / {{ prestamo.fecha_prestamo.year}} </th>
+
+                </tr>
+                <tr>
+                    <th> Fecha de devolucion </th>
+                    <th> {{ prestamo.fecha_devolucion.day }} / {{ prestamo.fecha_devolucion.month}} / {{ prestamo.fecha_devolucion.year}} </th>
+                </tr>
+            </tbody>
+        </thead>
+    </table>
+
+    {% if prestamo is not None %}
+    <center>
+        <a href="{% url 'prestamos:devolver' prestamo.id %}" class="btn btn-success"> Devolver </a>
+    </center>
+    {% endif %}
+
+    {% if messages %}
+    
+    <a href="{% url 'book:user_index' %}" class="btn btn-warning btn-block"> Atras </a>
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}

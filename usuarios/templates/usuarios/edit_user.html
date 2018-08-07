@@ -38,14 +38,12 @@
                 <div class="col-md-9">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary col-md-5"> Change </button>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    <a href="{% url 'book:user_index' %}" class="btn btn-danger col-md-5"> Cancel </a>
                 </div>
+                
             </div>
-            
-            <div class="container">
-                <button type="submit" class="btn btn-primary col-md-5"> Change </button>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                <a href="{% url 'book:user_index' %}" class="btn btn-danger col-md-5"> Cancel </a>
-            </div> 
         </form>    
         <input type="hidden" id="user_municipio" value='{{ request.user.municipio }}'>   
         <input type='hidden' id="municipio_id" value='{{ request.user.municipio.id }}'> 

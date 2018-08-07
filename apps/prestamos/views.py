@@ -1,13 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from usuarios.mixins import UserMixin, AdminMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.urls import reverse_lazy
 from .models import Prestamo
 from apps.libros.models import Libros
 from django.utils.timezone import now
 from datetime import datetime, timedelta
-from django.http import HttpRequest
-from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.template import RequestContext, loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -78,17 +76,31 @@ class PrestamosAdminView(AdminMixin, ListView):
 def devolver_libro(request, pk):
     prestamo = Prestamo.objects.get(pk=pk)
 
-    prestamo.estado = 3
-    prestamo.save()
-    prestamo.usuario.estado = 1
-    prestamo.usuario.save()
+    if prestamo.estado == 2 or prestamo.estado == 1:  
+        prestamo.estado = 3
+        prestamo.save()
+        prestamo.usuario.estado = 1
+        prestamo.usuario.save()
 
-    id_libro = prestamo.libro.id
-    Libro = Libros.objects.get(id=id_libro)
-    Libro.disponibles += 1
-    Libro.save()
+        id_libro = prestamo.libro.id
+        Libro = Libros.objects.get(id=id_libro)
+        Libro.disponibles += 1
+        Libro.save()
+    else:
+        messages.error(request, 'Este Libro ya esta devuelto')
+        return redirect(reverse_lazy('prestamos:devolver-codigo'))
 
-    
-    
     return redirect(reverse_lazy('book:user_index'))
+
+
+class DevolverLibroView(AdminMixin, TemplateView):
+    template_name = 'prestamos/devolver_libro.html'
+
+    def post(self, request, *args, **kwargs):
+        buscar = request.POST['codigo']
+        if (buscar):
+            prestamos = Prestamo.objects.get(token=buscar)
+        else:
+            prestamos = ''
+        return render(request, 'prestamos/devolver_libro.html', {'prestamo': prestamos})
     

@@ -21,12 +21,12 @@ class User(AbstractUser):
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, blank=True, null=True)
     zona = models.PositiveIntegerField(_('zona del municipio'), blank=True, null=True)
     escolaridad = models.PositiveIntegerField(_('escolaridad'), default=0, choices=[
-        ( 1, 'None' ),
-        ( 2, 'Primaria'),
-        ( 3,'Basicos'),
-        ( 4, 'Diversificado'),
-        ( 5, 'Universidad'),
-        ( 6, 'Maestria'),
+        ( 0, 'None' ),
+        ( 1, 'Primaria'),
+        ( 2,'Basicos'),
+        ( 3, 'Diversificado'),
+        ( 4, 'Universidad'),
+        ( 5, 'Maestria'),
     ])
     establecimiento = models.CharField(_('establecimiento'), max_length=150, blank=True, null=True)
     estado = models.PositiveSmallIntegerField(_('estado'), default=1)

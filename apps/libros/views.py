@@ -24,11 +24,6 @@ def fecha_limite():
             prestamo.usuario.estado = 2
             prestamo.save()
             prestamo.usuario.save()
-        else:
-            prestamo.estado = 1
-            prestamo.usuario.estado = 1
-            prestamo.save()
-            prestamo.usuario.save()
             
     
     
@@ -59,9 +54,7 @@ class DeleteBookView(DeleteView):
 
 
 class UserBookList(UserMixin,View):
-    
     fecha_limite()
-    
     @staticmethod
     def get(request):
         biblioteca = Biblioteca.objects.all()
@@ -75,7 +68,6 @@ class UserBookList(UserMixin,View):
         print(nuevo)
         libros = Libros.objects.filter(biblioteca__id = nuevo).values('id', "titulo", "autor__nombre", "tema__tema", "disponibles", "ubicacion", "fecha_registro")
         libros = json.dumps(list(libros), cls=serializers.json.DjangoJSONEncoder)
-        
         return JsonResponse({"Libro": libros})
         
 
@@ -103,4 +95,6 @@ class CrearBiblioteca(View):
             )
 
         return JsonResponse({"data": data})
+
+
 
