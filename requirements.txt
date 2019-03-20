@@ -1,0 +1,7 @@
+pillow
+django 
+gunicorn
+django_heroku
+pillow
+django-import-export
+django-cors-headers
